@@ -4,7 +4,10 @@ from src.tpc_reader.reader import TCPReader
 
 
 def packet_callback(packet):
-    TCPReader(bytes(packet['TCP'].payload)).read()
+    _payload = bytes(packet['TCP'].payload)
+    if b"MapComplementaryInformationEvent" in _payload:
+        print(_payload)
+        TCPReader(bytes(packet['TCP'].payload)).read()
 
 
 if __name__ == "__main__":

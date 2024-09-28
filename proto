@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package amakna;
+
+message MapComplementaryInformationsDataMessage {
+    uint32 subAreaId = 1;
+    double mapId = 2;
+    repeated HouseInformations houses = 3;
+    repeated GameRolePlayActorInformations actors = 4;
+    repeated InteractiveElement interactiveElements = 5;
+    repeated StatedElement statedElements = 6;
+    repeated MapObstacle obstacles = 7;
+    repeated FightCommonInformations fights = 8;
+    bool hasAggressiveMonsters = 9;
+    FightStartingPositions fightStartPositions = 10;
+}
+
+message HouseInformations {
+    uint32 houseId = 1;
+    uint32 modelId = 2;
+}
+
+message GameRolePlayActorInformations {
+    double contextualId = 1;
+    EntityDispositionInformations disposition = 2;
+    EntityLook look = 3;
+}
+
+message EntityDispositionInformations {
+    int32 cellId = 1;
+    int32 direction = 2;
+}
+
+message EntityLook {
+    uint32 bonesId = 1;
+    repeated uint32 skins = 2;
+    repeated int32 indexedColors = 3;
+    repeated int32 scales = 4;
+    repeated SubEntity subentities = 5;
+}
+
+message SubEntity {
+    uint32 bindingPointCategory = 1;
+    uint32 bindingPointIndex = 2;
+    EntityLook subEntityLook = 3;
+}
+
+message InteractiveElement {
+    int32 elementId = 1;
+    int32 elementTypeId = 2;
+    repeated InteractiveElementSkill enabledSkills = 3;
+    repeated InteractiveElementSkill disabledSkills = 4;
+    bool onCurrentMap = 5;
+}
+
+message InteractiveElementSkill {
+    uint32 skillId = 1;
+    int32 skillInstanceUid = 2;
+}
+
+message StatedElement {
+    int32 elementId = 1;
+    uint32 elementCellId = 2;
+    uint32 elementState = 3;
+    bool onCurrentMap = 4;
+}
+
+message MapObstacle {
+    uint32 obstacleCellId = 1;
+    int32 state = 2;
+}
+
+message FightCommonInformations {
+    uint32 fightId = 1;
+    int32 fightType = 2;
+    repeated FightTeamInformations fightTeams = 3;
+    repeated uint32 fightTeamsPositions = 4;
+    repeated FightOptionsInformations fightTeamsOptions = 5;
+}
+
+message FightTeamInformations {
+    int32 teamId = 1;
+    double leaderId = 2;
+    int32 teamSide = 3;
+    int32 teamTypeId = 4;
+    int32 nbWaves = 5;
+    repeated FightTeamMemberInformations teamMembers = 6;
+}
+
+message FightTeamMemberInformations {
+    uint32 memberId = 1;
+    string memberName = 2;
+}
+
+message FightOptionsInformations {
+    bool isSecret = 1;
+    bool isRestrictedToPartyOnly = 2;
+    bool isClosed = 3;
+    bool isAskingForHelp = 4;
+}
+
+message FightStartingPositions {
+    repeated uint32 positionsForChallengers = 1;
+    repeated uint32 positionsForDefenders = 2;
+}

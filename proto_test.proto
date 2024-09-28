@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package amakna;
+
+message MainMessage {
+    oneof content {
+        Request request = 1;
+        Response response = 2;
+        MapComplementaryInformationEvent event = 3;
+    }
+}
+
+message Request {
+    int32 id = 1;
+}
+
+message Response {
+    string status = 1; // Example field
+}
+
+
+message Event {
+    MapComplementaryInformationEvent content = 1;
+}
+
+
+message MapComplementaryInformationEvent {
+    uint32 subareaId = 1;
+    uint64 mapId = 2;
+}
+

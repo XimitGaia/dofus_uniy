@@ -1,0 +1,220 @@
+using System;
+using System.CodeDom.Compiler;
+using System.Diagnostics;
+using Google.Protobuf;
+using Google.Protobuf.Reflection;
+using Il2CppDummyDll;
+
+namespace Com.Ankama.Dofus.Server.Game.Protocol.Quest;
+
+[Token(Token = "0x2000191")]
+[DebuggerDisplay("{ToString(),nq}")]
+public sealed class QuestObjectiveUnfollowRequest : IMessage<QuestObjectiveUnfollowRequest>, IMessage, IEquatable<QuestObjectiveUnfollowRequest>, IDeepCloneable<QuestObjectiveUnfollowRequest>, IBufferMessage
+{
+	[Token(Token = "0x400054C")]
+	[FieldOffset(Offset = "0x0")]
+	private static readonly MessageParser<QuestObjectiveUnfollowRequest> _parser;
+
+	[Token(Token = "0x400054D")]
+	[FieldOffset(Offset = "0x10")]
+	private UnknownFieldSet _unknownFields;
+
+	[Token(Token = "0x400054E")]
+	public const int QuestIdFieldNumber = 1;
+
+	[Token(Token = "0x400054F")]
+	[FieldOffset(Offset = "0x18")]
+	private int questId_;
+
+	[Token(Token = "0x4000550")]
+	public const int ObjectiveIdFieldNumber = 2;
+
+	[Token(Token = "0x4000551")]
+	[FieldOffset(Offset = "0x1C")]
+	private int objectiveId_;
+
+	[Token(Token = "0x1700035F")]
+	[DebuggerNonUserCode]
+	[GeneratedCode("protoc", null)]
+	public static MessageParser<QuestObjectiveUnfollowRequest> Parser
+	{
+		[Token(Token = "0x6000FD1")]
+		[Address(RVA = "0xC49EA0", Offset = "0xC492A0", VA = "0x180C49EA0")]
+		get
+		{
+			return null;
+		}
+	}
+
+	[Token(Token = "0x17000360")]
+	[DebuggerNonUserCode]
+	[GeneratedCode("protoc", null)]
+	public static MessageDescriptor Descriptor
+	{
+		[Token(Token = "0x6000FD2")]
+		[Address(RVA = "0xC49DF0", Offset = "0xC491F0", VA = "0x180C49DF0")]
+		get
+		{
+			return null;
+		}
+	}
+
+	[Token(Token = "0x17000361")]
+	[DebuggerNonUserCode]
+	[GeneratedCode("protoc", null)]
+	private MessageDescriptor pb_003A_003AGoogle_002EProtobuf_002EIMessage_002EDescriptor
+	{
+		[Token(Token = "0x6000FD3")]
+		[Address(RVA = "0xC49EF0", Offset = "0xC492F0", VA = "0x180C49EF0", Slot = "8")]
+		get
+		{
+			return null;
+		}
+	}
+
+	[Token(Token = "0x17000362")]
+	[GeneratedCode("protoc", null)]
+	[DebuggerNonUserCode]
+	public int QuestId
+	{
+		[Token(Token = "0x6000FD7")]
+		[Address(RVA = "0x894410", Offset = "0x893810", VA = "0x180894410")]
+		get
+		{
+			return default(int);
+		}
+		[Token(Token = "0x6000FD8")]
+		[Address(RVA = "0x894490", Offset = "0x893890", VA = "0x180894490")]
+		set
+		{
+		}
+	}
+
+	[Token(Token = "0x17000363")]
+	[DebuggerNonUserCode]
+	[GeneratedCode("protoc", null)]
+	public int ObjectiveId
+	{
+		[Token(Token = "0x6000FD9")]
+		[Address(RVA = "0x87EAE0", Offset = "0x87DEE0", VA = "0x18087EAE0")]
+		get
+		{
+			return default(int);
+		}
+		[Token(Token = "0x6000FDA")]
+		[Address(RVA = "0x87EB10", Offset = "0x87DF10", VA = "0x18087EB10")]
+		set
+		{
+		}
+	}
+
+	[Token(Token = "0x6000FD4")]
+	[Address(RVA = "0x7B00C0", Offset = "0x7AF4C0", VA = "0x1807B00C0")]
+	[GeneratedCode("protoc", null)]
+	[DebuggerNonUserCode]
+	public QuestObjectiveUnfollowRequest()
+	{
+	}
+
+	[Token(Token = "0x6000FD5")]
+	[Address(RVA = "0x93ACF0", Offset = "0x93A0F0", VA = "0x18093ACF0")]
+	[DebuggerNonUserCode]
+	[GeneratedCode("protoc", null)]
+	public QuestObjectiveUnfollowRequest(QuestObjectiveUnfollowRequest other)
+	{
+	}
+
+	[Token(Token = "0x6000FD6")]
+	[Address(RVA = "0xC49B70", Offset = "0xC48F70", VA = "0x180C49B70", Slot = "10")]
+	[GeneratedCode("protoc", null)]
+	[DebuggerNonUserCode]
+	public QuestObjectiveUnfollowRequest Clone()
+	{
+		return null;
+	}
+
+	[Token(Token = "0x6000FDB")]
+	[Address(RVA = "0xC49C00", Offset = "0xC49000", VA = "0x180C49C00", Slot = "0")]
+	[DebuggerNonUserCode]
+	[GeneratedCode("protoc", null)]
+	public override bool Equals(object other)
+	{
+		return default(bool);
+	}
+
+	[Token(Token = "0x6000FDC")]
+	[Address(RVA = "0x93AA70", Offset = "0x939E70", VA = "0x18093AA70", Slot = "9")]
+	[DebuggerNonUserCode]
+	[GeneratedCode("protoc", null)]
+	public bool Equals(QuestObjectiveUnfollowRequest other)
+	{
+		return default(bool);
+	}
+
+	[Token(Token = "0x6000FDD")]
+	[Address(RVA = "0x9691C0", Offset = "0x9685C0", VA = "0x1809691C0", Slot = "2")]
+	[GeneratedCode("protoc", null)]
+	[DebuggerNonUserCode]
+	public override int GetHashCode()
+	{
+		return default(int);
+	}
+
+	[Token(Token = "0x6000FDE")]
+	[Address(RVA = "0xC49C90", Offset = "0xC49090", VA = "0x180C49C90", Slot = "3")]
+	[GeneratedCode("protoc", null)]
+	[DebuggerNonUserCode]
+	public override string ToString()
+	{
+		return null;
+	}
+
+	[Token(Token = "0x6000FDF")]
+	[Address(RVA = "0x916500", Offset = "0x915900", VA = "0x180916500", Slot = "6")]
+	[GeneratedCode("protoc", null)]
+	[DebuggerNonUserCode]
+	public void WriteTo(CodedOutputStream output)
+	{
+	}
+
+	[Token(Token = "0x6000FE0")]
+	[Address(RVA = "0x969480", Offset = "0x968880", VA = "0x180969480", Slot = "12")]
+	[GeneratedCode("protoc", null)]
+	[DebuggerNonUserCode]
+	private void pb_003A_003AGoogle_002EProtobuf_002EIBufferMessage_002EInternalWriteTo(ref WriteContext output)
+	{
+	}
+
+	[Token(Token = "0x6000FE1")]
+	[Address(RVA = "0xC49AB0", Offset = "0xC48EB0", VA = "0x180C49AB0", Slot = "7")]
+	[DebuggerNonUserCode]
+	[GeneratedCode("protoc", null)]
+	public int CalculateSize()
+	{
+		return default(int);
+	}
+
+	[Token(Token = "0x6000FE2")]
+	[Address(RVA = "0x93AB30", Offset = "0x939F30", VA = "0x18093AB30", Slot = "4")]
+	[DebuggerNonUserCode]
+	[GeneratedCode("protoc", null)]
+	public void MergeFrom(QuestObjectiveUnfollowRequest other)
+	{
+	}
+
+	[Token(Token = "0x6000FE3")]
+	[Address(RVA = "0x9163F0", Offset = "0x9157F0", VA = "0x1809163F0", Slot = "5")]
+	[GeneratedCode("protoc", null)]
+	[DebuggerNonUserCode]
+	public void MergeFrom(CodedInputStream input)
+	{
+	}
+
+	[Token(Token = "0x6000FE4")]
+	[Address(RVA = "0x93AE20", Offset = "0x93A220", VA = "0x18093AE20", Slot = "11")]
+	[DebuggerNonUserCode]
+	[GeneratedCode("protoc", null)]
+	private void pb_003A_003AGoogle_002EProtobuf_002EIBufferMessage_002EInternalMergeFrom(ref ParseContext input)
+	{
+	}
+}
