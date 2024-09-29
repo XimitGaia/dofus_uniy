@@ -7,8 +7,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-scapy = "^2.5.0"
+scapy = "^2.6.0"
 protobuf = "^5.28.2"
+protobuf-inspector = "^0.2"
 
 
 [build-system]

@@ -27,5 +27,6 @@ message Event {
 message MapComplementaryInformationEvent {
     uint32 subareaId = 1;
     uint64 mapId = 2;
+    bool hasAggressiveMonsters = 9;
 }
 
