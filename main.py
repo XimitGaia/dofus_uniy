@@ -1,6 +1,6 @@
 from scapy.all import sniff
 
-from src.tpc_reader.reader import TCPReader
+from src.tcp_reader.reader import TCPReader
 
 
 def packet_callback(packet):

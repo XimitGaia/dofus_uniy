@@ -1,32 +1,189 @@
 syntax = "proto3";
 
-package amakna;
-
-message MainMessage {
-    oneof content {
-        Request request = 1;
-        Response response = 2;
-        MapComplementaryInformationEvent event = 3;
-    }
-}
-
-message Request {
-    int32 id = 1;
-}
-
-message Response {
-    string status = 1; // Example field
-}
-
-
-message Event {
-    MapComplementaryInformationEvent content = 1;
-}
-
 
 message MapComplementaryInformationEvent {
-    uint32 subareaId = 1;
-    uint64 mapId = 2;
-    bool hasAggressiveMonsters = 9;
-}
+    uint32 subarea_id = 1;
+    uint64 map_id = 2;
+    repeated ActorPositionInformation actors_position_information = 4;
+    repeated InteractiveElement interactive_elements = 5;
+    repeated StatedElement stated_elements = 6;
+    bool has_aggressive_monsters = 9;
 
+    message InteractiveElement {
+        int32 element_id = 1;
+        int32 element_type_id = 2;
+        repeated InteractiveElementSkill enabled_skills = 3;
+        repeated InteractiveElementSkill disabled_skills = 4;
+        bool on_current_map = 5;
+        int32 age_bonus = 6;
+
+        message InteractiveElementSkill {
+            int32 skill_id = 1;
+            int32 skill_instance_uid = 2;
+            int32 name_id = 3;
+        }
+    }
+
+    message StatedElement {
+        int32 element_id = 1;
+        int32 cell_id = 2;
+        int32 state = 3;
+        bool on_current_map = 4;
+    }
+
+    message ActorPositionInformation {
+        int64 actor_id = 1;
+        EntityDisposition disposition = 2;
+        ActorInformation actor_information = 3;
+
+        message ActorInformation {
+            EntityLook look = 1;
+            oneof information {
+                RolePlayActor role_play_actor = 2;
+                Fighter fighter = 3;
+            }
+            enum InformationOneofCase {
+                None = 0;
+                RolePlayActor = 2;
+                Fighter = 3;
+            }
+        }
+        enum ActorOneofCase {
+            NONE = 0;
+            NAMED_ACTOR = 4;
+            TAX_COLLECTOR_ACTOR = 5;
+            MONSTER_GROUP_ACTOR = 6;
+            NPC_ACTOR = 7;
+            PRISM_ACTOR = 8;
+            PORTAL_ACTOR = 9;
+            TREASURE_HUNT_NPC_ID = 10;
+        }
+
+        message RolePlayActor {
+            oneof actor {
+                NamedActor named_actor = 4;
+                MonsterGroupActor monster_group_actor = 6;
+                int32 treasure_hunt_npc_id = 10;
+            }
+
+            message NamedActor {
+                string name = 1;
+
+                oneof actor {
+                    Humanoid humanoid_information = 2;
+                    Mount mount_information = 3;
+                }
+
+                message Humanoid {
+                    repeated HumanOption options = 3;
+                    int64 account_id = 4;
+                    MutantInformation mutant_information = 6;
+
+                    message HumanOption {
+                        oneof option {
+                            Followers followers = 3;
+                            AllianceInformation alliance_information = 5;
+                            EmoteOption emote_option = 6;
+                            TitleOption title_option = 7;
+                            OrnamentOption ornament_option = 8;
+                            ObjectUseOption object_use_option = 9;
+                            SkillUseOption skill_use_option = 10;
+                            float speed_multiplier = 11;
+                        }
+
+                        message Followers {
+                            repeated IndexedEntityLook following_characters_looks = 1;
+                        }
+
+                        message IndexedEntityLook {
+                            EntityLook look = 1;
+                            int32 index = 2;
+                        }
+
+                        message AllianceInformation {
+                            // Define fields as per your needs
+                        }
+
+                        message EmoteOption {
+                            int32 emote_id = 1;
+                            string emote_start_time = 2;
+                        }
+
+                        message TitleOption {
+                            int32 title_id = 1;
+                            string title_parameter = 2;
+                        }
+
+                        message OrnamentOption {
+                            int32 ornament_id = 1;
+                            int32 player_level = 2;
+                            int32 league_id = 3;
+                            int32 ladder_position = 4;
+                        }
+
+                        message ObjectUseOption {
+                            int32 delayed_action_type = 1;
+                            string end_delay = 2;
+                            int32 object_gid = 3;
+                        }
+
+                        message SkillUseOption {
+                            int32 element_id = 1;
+                            int32 skill_id = 2;
+                            string skill_end_time = 3;
+                        }
+                    }
+
+                    message MutantInformation {
+                        int32 monster_id = 1;
+                        int32 power_level = 2;
+                    }
+                }
+
+                message Mount {
+                    string owner_name = 1;
+                    int32 level = 2;
+                }
+            }
+
+
+            message MonsterGroupActor {
+                MonsterGroupStaticInformation identification = 1;
+                int32 loot_share = 2;
+                message WaveInformation {
+                    int32 wave_count = 1;
+                    repeated MonsterGroupStaticInformation alternatives = 2;
+                }
+
+                message MonsterGroupStaticInformation {
+                    MonsterInGroupInformation main_creature = 1;
+                    repeated MonsterInGroupInformation underlings = 2;
+
+                    message MonsterInGroupInformation {
+                        int32 gid = 1;
+                        int32 grade = 2;
+                        int32 level = 3;
+                    }
+
+                }
+            }
+
+        }
+
+
+        message EntityLook {
+            string description = 1;
+        }
+
+
+        message Fighter {
+            int32 strength = 1;
+        }
+    }
+
+    enum EntityDisposition {
+        UNKNOWN = 0;
+        ACTIVE = 1;
+        INACTIVE = 2;
+    }
+}

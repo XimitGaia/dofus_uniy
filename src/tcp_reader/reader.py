@@ -14,13 +14,13 @@ class TCPReader:
 
     def save_snapshot(self, start: int = 0, size: int = None):
         self._stream.seek(start)
-        with open(Path(f"./src/tpc_reader/tcp_chunks/{uuid4()}").resolve(), "wb") as file:
+        with open(Path(f"./src/tcp_reader/tcp_chunks/{uuid4()}").resolve(), "wb") as file:
             file.write(self._stream.read(size))
 
 
     def read(self):
-        self.save_snapshot(107)
+        # self.save_snapshot(107)
         self._stream.seek(107)
         map_event = proto_test_pb2.MapComplementaryInformationEvent()
         map_event.ParseFromString(self._stream.read())
-        print(map_event.subareaId, map_event.mapId, map_event.hasAggressiveMonsters)
+        print(map_event)
