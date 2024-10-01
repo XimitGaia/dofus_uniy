@@ -4,10 +4,12 @@ from src.tcp_reader.reader import TCPReader
 
 
 def packet_callback(packet):
-    _payload = bytes(packet['TCP'].payload)
-    if b"MapComplementaryInformationEvent" in _payload:
-        print(_payload)
-        TCPReader(bytes(packet['TCP'].payload)).read()
+    try:
+        _payload = bytes(packet['TCP'].payload)
+        if b"MapComplementaryInformationEvent" in _payload:
+            TCPReader(bytes(packet['TCP'].payload)).read()
+    except Exception as error:
+        print(error)
 
 
 if __name__ == "__main__":

@@ -10,6 +10,10 @@ python = "^3.12"
 scapy = "^2.6.0"
 protobuf = "^5.28.2"
 protobuf-inspector = "^0.2"
+unitypy = "^1.20.2"
+pycryptodomex = "^3.20.0"
+bson = "^0.5.10"
+python-decouple = "^3.8"
 
 
 [build-system]
