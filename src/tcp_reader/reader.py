@@ -16,9 +16,10 @@ class TCPReader:
 
     def save_snapshot(self, start: int = 0, size: int = None):
         self._stream.seek(start)
-        with open(Path(f"./src/tcp_reader/tcp_chunks/{uuid4()}").resolve(), "wb") as file:
+        with open(
+            Path(f"./src/tcp_reader/tcp_chunks/{uuid4()}").resolve(), "wb"
+        ) as file:
             file.write(self._stream.read(size))
-
 
     def read(self):
         # self.save_snapshot(107)
@@ -29,16 +30,17 @@ class TCPReader:
             e.element_id: (e.cell_id, not bool(e.state))
             for e in map_event.stated_elements
         }
-        _map = MapData(
-            map_id=map_event.map_id,
-            harverstables=[
+        _h = []
+        for i in map_event.interactive_elements:
+            _h.append(
                 Harverstable(
-                    cell_id=cell_map.get(i.element_id,(-1, False))[0],
-                    is_present=cell_map.get(i.element_id,(-1, False))[1],
+                    cell_id=cell_map.get(i.element_id, (-1, False))[0],
+                    is_present=cell_map.get(i.element_id, (-1, False))[1],
                     element_id=i.element_id,
                     element_type_id=i.element_type_id,
+                    # name_id=i.name_id
                 )
-                for i in map_event.interactive_elements
-            ]
-        )
+            )
+
+        _map = MapData(map_id=map_event.map_id, harverstables=_h)
         print(_map)

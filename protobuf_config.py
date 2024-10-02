@@ -4,7 +4,7 @@ types = {
         2: ("uint64", "mapId"),
         # 5: ("packed interactiveElement", "interactiveElements"),
         # 6: ("packed StatedElement", "statedElements"),
-        9: ("bool", "hasAggressiveMonsters")
+        9: ("bool", "hasAggressiveMonsters"),
     },
     # "interactiveElement": {
     #     1: ("variant", "skillIdField"),
