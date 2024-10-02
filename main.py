@@ -1,3 +1,9 @@
+import json
+import time
+from dataclasses import dataclass
+
+import pyautogui
+from PIL import ImageGrab
 from scapy.all import sniff
 
 from src.tcp_reader.reader import TCPReader
@@ -14,4 +20,5 @@ def packet_callback(packet):
 
 if __name__ == "__main__":
     sniff(filter="tcp", prn=packet_callback)
+
 
