@@ -1,6 +1,26 @@
 from dataclasses import dataclass
 
 
+
+@dataclass(slots=True, frozen=True)
+class MapRegister:
+    map_id_from: int
+    map_id_to: int
+    direction: int
+    cell_id: int
+    offset_x: float
+    offset_y: float
+
+    def as_tuple(self) -> tuple[int, int, int, int, float, float]:
+        return (
+            self.map_id_from,
+            self.map_id_to,
+            self.direction,
+            self.cell_id,
+            self.offset_x,
+            self.offset_y,
+        )
+
 @dataclass(slots=True, frozen=True)
 class Harverstable:
     cell_id: int

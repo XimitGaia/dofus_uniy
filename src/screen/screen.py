@@ -44,22 +44,21 @@ class Screen:
         _y = (_row + 1) * self.cell_height / 2
         if _row % 2:
             _x += self.cell_width / 2
-        return int(_x + offset_x), int(
-            _y + offset_y
-        )
+        return int(_x + offset_x), int(_y + offset_y)
+
 _resolutions = [
-    (640,480),
-    (720,400),
-    (720,480),
-    (800,600),
-    (832,624),
-    (1024,768),
-    (1152,864),
-    (1152,870),
-    (1152,870),
-    (1280,720),
-    (1280,800),
-    (1280,1024),
+    (640, 480),
+    (720, 400),
+    (720, 480),
+    (800, 600),
+    (832, 624),
+    (1024, 768),
+    (1152, 864),
+    (1152, 870),
+    (1152, 870),
+    (1280, 720),
+    (1280, 800),
+    (1280, 1024),
 ]
 
 transform = {
@@ -71,7 +70,8 @@ transform = {
     "m32": 333.25,
 }
 # 1104 554
-#
+
+#    (1280, 1024),
 # 1.833887
 
 element = {
@@ -83,12 +83,37 @@ element = {
     "m_origin": {"x": 18, "y": 124},
     "m_size": {"x": 602, "y": 319},
 }
+
+s = Screen.new()
+
+_a = (s.gameplay_screen[2] - s.gameplay_screen[0]) * 18
+_b = s.gameplay_screen[3] * 124
+
+
 _x = element["m_origin"]["x"]
 _y = element["m_origin"]["y"]
 
 _new_x = (transform["m11"] * _x + transform["m12"] * _y) + transform["m31"]
 _new_y = (transform["m21"] * _x + transform["m22"] * _y) + transform["m32"]
-# (1280,1024)
+
+
+position = [18, 124]
+matrix = [
+    [100.0, 0.0],  # m11, m12
+    [0.0, 100.0],  # m21, m22
+    [23.5, 333.25] # m31, m32
+]
+
+
+def transform(position, matrix):
+    # Multiplica o vetor posição pela matriz de transformação
+    vector_x = matrix[0][0] * position[0] + matrix[1][0] * position[1] + matrix[2][0]
+    vector_y = matrix[0][1] * position[0] + matrix[1][1] * position[1] + matrix[2][1]
+
+    return [vector_x, vector_y]
+
+a = transform(position,matrix)
+
 # 3440
 # 1440
 
@@ -100,14 +125,13 @@ if __name__ == "__main__":
     c_height = 0.87555
     g_screen = 1.425
     c_width = c_height * g_screen
-    s = Screen.new()
+
     # time.sleep(2)
     # pyautogui.moveTo(s._pos_from_cell(455, -_x, -_y))
 
-
     for a in _resolutions:
         print(a)
-        _new_x = (_new_x /a[0]) *s.screen_size[0]
-        _new_y = _new_y /a[1]*s.screen_size[1]
+        _new_x = (_new_x / a[0]) * s.screen_size[0]
+        _new_y = _new_y / a[1] * s.screen_size[1]
         time.sleep(2)
-        pyautogui.moveTo(s._pos_from_cell(455, -_new_x/1000, _new_y/1000))
+        pyautogui.moveTo(s._pos_from_cell(455, -_new_x / 1000, _new_y / 1000))
