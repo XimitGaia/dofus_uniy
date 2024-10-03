@@ -28,6 +28,7 @@ class Harverstable:
     element_type_id: int
     is_present: bool
     # element_type_id: int
+    # element_type_id: int
 
     def __str__(self):
         present = "✅" if self.is_present else "❌"
