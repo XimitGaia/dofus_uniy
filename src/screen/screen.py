@@ -20,8 +20,8 @@ class Screen:
         height_const: float = 0.87555
         width_const: float = 1.425 * height_const
         screen_img = ImageGrab.grab()
-        _width = screen_img.size[0]
-        _height = screen_img.size[1]
+        _width = screen_img.size[0]/2
+        _height = screen_img.size[1]/2
         _gameplay_width = _height * width_const
         _gameplay_height = _height * height_const
         _x_offset = (_width - _gameplay_width) / 2
@@ -61,77 +61,121 @@ _resolutions = [
     (1280, 1024),
 ]
 
-transform = {
-    "m11": 100.0,
-    "m12": 0.0,
-    "m21": 0.0,
-    "m22": 100.0,
-    "m31": 23.5,
-    "m32": 333.25,
+_data1 = {
+    "cell": 455,
+    "transform": {
+        "m11": 100.0,
+        "m12": 0.0,
+        "m21": 0.0,
+        "m22": 100.0,
+        "m31": 23.5,
+        "m32": 333.25,
+    },
+    "element": {
+        "m_id": 88321,
+        "m_type": 1,
+        "m_gfxId": 63672,
+        "m_height": 0,
+        "m_horizontalSymmetry": 0,
+        "m_origin": {"x": 18, "y": 124},
+        "m_size": {"x": 602, "y": 319},
+    }
 }
-# 1104 554
-
-#    (1280, 1024),
-# 1.833887
-
-element = {
-    "m_id": 88321,
-    "m_type": 1,
-    "m_gfxId": 63672,
-    "m_height": 0,
-    "m_horizontalSymmetry": 0,
-    "m_origin": {"x": 18, "y": 124},
-    "m_size": {"x": 602, "y": 319},
+_data2 = {
+    "cell": 383,
+    "transform": {
+          "m11": 100.0,
+          "m12": 0.0,
+          "m21": 0.0,
+          "m22": 100.0,
+          "m31": 31.0,
+          "m32": 152.25
+        },
+    "element": {
+          "m_id": 88307,
+          "m_type": 1,
+          "m_gfxId": 63662,
+          "m_height": 0,
+          "m_horizontalSymmetry": 0,
+          "m_origin": {
+            "x": 18,
+            "y": 124
+          },
+          "m_size": {
+            "x": 147,
+            "y": 270
+          }
+        }
 }
+_data3 = {
+    "cell": 246,
+    "transform": {
+          "m11": -100.0,
+          "m12": 0.0,
+          "m21": 0.0,
+          "m22": 100.0,
+          "m31": 134.5,
+          "m32": 169.75
+        },
+    "element": {
+        "m_origin": {"x": 0, "y": 0},
+        "m_size": {"x": 0, "y": 0},
+    }
+}
+_data4 = {
+    "cell": 397,
+    "transform": {
+          "m11": 100.0,
+          "m12": 0.0,
+          "m21": 0.0,
+          "m22": 100.0,
+          "m31": -135.5,
+          "m32": -100.75
+        },
+    "element": {
+          "m_id": 88207,
+          "m_type": 1,
+          "m_gfxId": 63583,
+          "m_height": 0,
+          "m_horizontalSymmetry": 0,
+          "m_origin": {"x": 26, "y": 81},
+          "m_size": {"x": 82, "y": 127}
+        }
+  }
+_data = _data2
 
+_x = _data["element"]["m_origin"]["x"]
+_y = _data["element"]["m_origin"]["y"]
 s = Screen.new()
-
-_a = (s.gameplay_screen[2] - s.gameplay_screen[0]) * 18
-_b = s.gameplay_screen[3] * 124
-
-
-_x = element["m_origin"]["x"]
-_y = element["m_origin"]["y"]
-
-_new_x = (transform["m11"] * _x + transform["m12"] * _y) + transform["m31"]
-_new_y = (transform["m21"] * _x + transform["m22"] * _y) + transform["m32"]
-
-
-position = [18, 124]
-matrix = [
-    [100.0, 0.0],  # m11, m12
-    [0.0, 100.0],  # m21, m22
-    [23.5, 333.25] # m31, m32
-]
-
-
-def transform(position, matrix):
-    # Multiplica o vetor posição pela matriz de transformação
-    vector_x = matrix[0][0] * position[0] + matrix[1][0] * position[1] + matrix[2][0]
-    vector_y = matrix[0][1] * position[0] + matrix[1][1] * position[1] + matrix[2][1]
-
-    return [vector_x, vector_y]
-
-a = transform(position,matrix)
-
-# 3440
-# 1440
-
-# -536
-# -1006
+_w = s.gameplay_screen[2] - s.gameplay_screen[0]
+_h = s.gameplay_screen[3]
+_resize_const = (s.screen_size[1]/1024)
+print(f"resize_const: {_resize_const}")
+# _new_x = _x * _resize_const
+# _new_y = _y * _resize_const
+_new_x = (_x + _data["element"]["m_size"]["x"]/2 ) * _resize_const
+_new_y = (_y + _data["element"]["m_size"]["y"]/2 + _data["transform"]["m32"] + _data["transform"]["m31"]) * _resize_const
+# _new_x = (_x + _data["transform"]["m31"]) * _resize_const
+# _new_y = (_y + _data["transform"]["m32"]) * _resize_const
+_new_x = int(_new_x)
+_new_y = int(_new_y)
+_pos_x, _pos_y = s._pos_from_cell(_data["cell"], _new_x, _new_y)
+cell_pos = s._pos_from_cell(_data["cell"])
+print("cell:", cell_pos)
+print("click:", _pos_x, _pos_y)
+print("img_size:", int(_data["element"]["m_size"]["x"] * _resize_const), int(_data["element"]["m_size"]["y"] * _resize_const))
+print(f"offsets:", _new_x, _new_y)
 
 
 if __name__ == "__main__":
     c_height = 0.87555
     g_screen = 1.425
     c_width = c_height * g_screen
+    pyautogui.moveTo(cell_pos)
+    time.sleep(0.5)
+    pyautogui.moveTo(_pos_x, _pos_y)
 
-    # time.sleep(2)
-    # pyautogui.moveTo(s._pos_from_cell(455, -_x, -_y))
+    # time.sleep(0.5)
 
-    for a in _resolutions:
-        print(a)
-        _new_x = (_new_x / a[0]) * s.screen_size[0]
-        _new_y = _new_y / a[1] * s.screen_size[1]
-        time.sleep(2)
-        pyautogui.moveTo(s._pos_from_cell(455, -_new_x / 1000, _new_y / 1000))
+    # pyautogui.moveTo(s._pos_from_cell(455, -_new_x, -_new_y))
+    # pyautogui.moveTo(s.gameplay_screen[0] +_x/1024 * s.screen_size[1], s.gameplay_screen[1] + _y/1024 * s.screen_size[1])
