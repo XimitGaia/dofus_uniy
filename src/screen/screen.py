@@ -20,8 +20,8 @@ class Screen:
         height_const: float = 0.87555
         width_const: float = 1.425 * height_const
         screen_img = ImageGrab.grab()
-        _width = screen_img.size[0]/2
-        _height = screen_img.size[1]/2
+        _width = screen_img.size[0]
+        _height = screen_img.size[1]
         _gameplay_width = _height * width_const
         _gameplay_height = _height * height_const
         _x_offset = (_width - _gameplay_width) / 2
@@ -44,7 +44,7 @@ class Screen:
         _y = (_row + 1) * self.cell_height / 2
         if _row % 2:
             _x += self.cell_width / 2
-        return int(_x + offset_x), int(_y + offset_y)
+        return int(_x + offset_x*self.screen_size[1]), int(_y + offset_y*self.screen_size[1])
 
 _resolutions = [
     (640, 480),
@@ -142,8 +142,7 @@ _data4 = {
           "m_size": {"x": 82, "y": 127}
         }
   }
-_data = _data2
-
+_data = _data1
 _x = _data["element"]["m_origin"]["x"]
 _y = _data["element"]["m_origin"]["y"]
 s = Screen.new()
@@ -153,12 +152,12 @@ _resize_const = (s.screen_size[1]/1024)
 print(f"resize_const: {_resize_const}")
 # _new_x = _x * _resize_const
 # _new_y = _y * _resize_const
-_new_x = (_x + _data["element"]["m_size"]["x"]/2 ) * _resize_const
-_new_y = (_y + _data["element"]["m_size"]["y"]/2 + _data["transform"]["m32"] + _data["transform"]["m31"]) * _resize_const
-# _new_x = (_x + _data["transform"]["m31"]) * _resize_const
-# _new_y = (_y + _data["transform"]["m32"]) * _resize_const
-_new_x = int(_new_x)
-_new_y = int(_new_y)
+# _new_x = (_x + _data["element"]["m_size"]["x"]/2 ) * _resize_const
+# _new_y = (_y + _data["element"]["m_size"]["y"]/2 + _data["transform"]["m32"] + _data["transform"]["m31"]) * _resize_const
+_new_x = _x * _resize_const + _data["transform"]["m31"]/100 * _w/100
+_new_y = _y * _resize_const + _data["transform"]["m32"]/100 * _w/100
+_new_x = -int(_new_x)
+_new_y = -int(_new_y)
 _pos_x, _pos_y = s._pos_from_cell(_data["cell"], _new_x, _new_y)
 cell_pos = s._pos_from_cell(_data["cell"])
 print("cell:", cell_pos)
@@ -171,9 +170,14 @@ if __name__ == "__main__":
     c_height = 0.87555
     g_screen = 1.425
     c_width = c_height * g_screen
-    pyautogui.moveTo(cell_pos)
-    time.sleep(0.5)
-    pyautogui.moveTo(_pos_x, _pos_y)
+    # pyautogui.moveTo(cell_pos)
+    # time.sleep(0.5)
+    # pyautogui.moveTo(_pos_x, _pos_y)
+    print((s.cell_height)/s.screen_size[1])
+    e = 4,420
+    d = 0,321
+    b = 2, 536
+    pyautogui.moveTo(s._pos_from_cell(6, 0, -s.cell_height))
 
     # time.sleep(0.5)
 
