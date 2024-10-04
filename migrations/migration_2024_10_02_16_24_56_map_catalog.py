@@ -36,6 +36,6 @@ class Migration(AbstractMigration):
             """
             cursor.execute(sql)
             sql = f"""
-                DROP TABLE MAP_CATALOG
+                DROP INDEX from_to
             """
             cursor.execute(sql)
