@@ -8,11 +8,11 @@ from clandestino_interfaces import AbstractMigration
 from clandestino_sqlite.infra import SQLiteInfra
 from decouple import config
 
-from src.model.map_data import MapRegister
-from src.repository.bot import BotData
 
 
 def gen_map(map_files_folder: Path, worldgraph: Path, elements: Path):
+    from src.model.map_data import MapRegister
+
     _map_files = glob.glob(str(map_files_folder / "*"))
     with open(worldgraph.resolve(), "r") as file:
         _wgraph = json.load(file)
@@ -77,6 +77,8 @@ def gen_map(map_files_folder: Path, worldgraph: Path, elements: Path):
 
 
 async def insert_data():
+    from src.repository.bot import BotData
+
     buffer = []
     for _m in gen_map(
         Path(config("MAPS_DIRECTORY_PATH")),
@@ -121,10 +123,10 @@ class Migration(AbstractMigration):
         """Undo modifications in database"""
         async with self.infra.get_cursor() as cursor:
             sql = f"""
-                DROP TABLE MAP_CATALOG
+                DROP INDEX from_to
             """
             cursor.execute(sql)
             sql = f"""
-                DROP INDEX from_to
+                DROP TABLE MAP_CATALOG
             """
             cursor.execute(sql)

@@ -5,11 +5,11 @@ from pathlib import Path
 from clandestino_interfaces import AbstractMigration
 from clandestino_sqlite.infra import SQLiteInfra, config
 
-from src.model.map_data import HarverstableInfo
-from src.repository.bot import BotData
 
 
 def gen_harvestables(map_files_folder: Path, elements: Path, harvestables: Path):
+    from src.model.map_data import HarverstableInfo
+
     _map_files = glob.glob(str(map_files_folder / "*"))
     with open(elements.resolve(), "r") as file:
         _elements = json.load(file)
@@ -57,6 +57,8 @@ def gen_harvestables(map_files_folder: Path, elements: Path, harvestables: Path)
 
 
 async def insert_data():
+    from src.repository.bot import BotData
+
     buffer = []
     for _m in gen_harvestables(
         Path(config("MAPS_DIRECTORY_PATH")),
@@ -102,10 +104,11 @@ class Migration(AbstractMigration):
         """Undo modifications in database"""
         async with self.infra.get_cursor() as cursor:
             sql = f"""
-                    DROP TABLE HARVERTABLE_INFO
-                """
-            cursor.execute(sql)
-            sql = f"""
                     DROP INDEX gfx_id
                 """
             cursor.execute(sql)
+            sql = f"""
+                    DROP TABLE HARVERTABLE_INFO
+                """
+            cursor.execute(sql)
+
