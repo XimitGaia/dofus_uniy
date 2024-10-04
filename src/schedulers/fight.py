@@ -1,0 +1,3 @@
+
+class FightScheduler:
+    pass
