@@ -22,6 +22,15 @@ class MapRegister:
 
 
 @dataclass(slots=True, frozen=True)
+class Zaap:
+    map_id: int
+    name: str
+
+    def as_tuple(self) -> tuple[int, str]:
+        return (self.map_id, self.name)
+
+
+@dataclass(slots=True, frozen=True)
 class HarverstableInfo:
     map_id: int
     cell_id: int
@@ -31,7 +40,7 @@ class HarverstableInfo:
     size_x: int
     size_y: int
 
-    def as_tuple(self) -> tuple[int, int, int,int, int, int, int]:
+    def as_tuple(self) -> tuple[int, int, int, int, int, int, int]:
         return (
             self.map_id,
             self.cell_id,

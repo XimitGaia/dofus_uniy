@@ -1,6 +1,6 @@
 from clandestino_sqlite.infra import SQLiteInfra
 
-from src.model.map_data import MapRegister, HarverstableInfo
+from src.model.map_data import MapRegister, HarverstableInfo, Zaap
 
 
 class BotData:
@@ -34,5 +34,16 @@ class BotData:
                     m_size_x,
                     m_size_y
                 ) VALUES (?,?,?,?,?,?,?)
+            """
+            cursor.executemany(sql, [i.as_tuple() for i in maps])
+
+    @classmethod
+    async def save_zaap(cls, maps: list[Zaap]):
+        async with cls._infra.get_cursor() as cursor:
+            sql = f"""
+                INSERT INTO  ZAAPS (
+                    map_id,
+                    name
+                ) VALUES (?,?)
             """
             cursor.executemany(sql, [i.as_tuple() for i in maps])

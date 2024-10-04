@@ -1,9 +1,6 @@
-import json
-import time
-from dataclasses import dataclass
+import asyncio
 
-import pyautogui
-from PIL import ImageGrab
+import clandestino
 from scapy.all import sniff
 
 from src.tcp_reader.reader import TCPReader
@@ -19,4 +16,5 @@ def packet_callback(packet):
 
 
 if __name__ == "__main__":
+    asyncio.run(clandestino.migrate_database())
     sniff(filter="tcp", prn=packet_callback)
