@@ -44,14 +44,15 @@ def gen_harvestables(map_files_folder: Path, elements: Path, harvestables: Path)
                     _cell["data"]["gfxId"],
                     {"m_origin": {"x": 0, "y": 0}, "m_size": {"x": 0, "y": 0}},
                 )
+                _offset_x = int(_offset["m_origin"]["x"] + _offset["m_size"]["x"]/2)
+                _offset_y = int(_offset["m_origin"]["y"] + _offset["m_size"]["y"]/2)
                 yield HarverstableInfo(
                     int(_map_json_file["m_Name"].split("_")[-1]),
                     _cell["data"]["cellId"],
                     _cell["data"]["gfxId"],
-                    _offset["m_origin"]["x"],
-                    _offset["m_origin"]["y"],
-                    _offset["m_size"]["x"],
-                    _offset["m_size"]["y"],
+                    _offset["m_interactionId"]["x"],
+                    _offset_x,
+                    _offset_y,
                 )
 
 
@@ -73,5 +74,5 @@ async def run2():
 if __name__ == "__main__":
     import asyncio
 
-    asyncio.run(run1())
+    # asyncio.run(run1())
     asyncio.run(run2())

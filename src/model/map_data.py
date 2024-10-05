@@ -35,20 +35,18 @@ class HarverstableInfo:
     map_id: int
     cell_id: int
     gfxId: int
-    origin_x: int
-    origin_y: int
-    size_x: int
-    size_y: int
+    interaction_id: int
+    offset_x: int
+    offset_y: int
 
-    def as_tuple(self) -> tuple[int, int, int, int, int, int, int]:
+    def as_tuple(self) -> tuple[int, int, int, int, int, int]:
         return (
             self.map_id,
             self.cell_id,
             self.gfxId,
-            self.origin_x,
-            self.origin_y,
-            self.size_x,
-            self.size_y,
+            self.interaction_id,
+            self.offset_x,
+            self.offset_y,
         )
 
 
