@@ -5,6 +5,7 @@ from scapy.all import AsyncSniffer
 
 
 class Sniffer:
+
     def __init__(self, queue: Queue):
         self.filter: str = f"tcp and dst host {self._get_network_ip()}"
         self._sniffer = AsyncSniffer(filter=self.filter, prn=self._callback)
@@ -31,3 +32,5 @@ class Sniffer:
     def stop(self):
         self._sniffer.stop()
 
+    def join(self):
+        self._sniffer.join()

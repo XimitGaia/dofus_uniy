@@ -548,6 +548,17 @@ files = [
 ]
 
 [[package]]
+name = "meeseeks-singleton"
+version = "0.4.4"
+description = "A Singleton python project"
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "meeseeks_singleton-0.4.4-py3-none-any.whl", hash = "sha256:e1ade489e9b9a76e9cc8a1e958d6749694bf35a71a0a273099b05c8579b301d4"},
+    {file = "meeseeks_singleton-0.4.4.tar.gz", hash = "sha256:d4683360f419abb22f4be1cbd1ae8a282e07304ee1ed61a85c844faf155153c6"},
+]
+
+[[package]]
 name = "mouseinfo"
 version = "0.1.3"
 description = "An application to display XY position and RGB color information for the pixel currently under the mouse. Works on Python 2 and 3."
@@ -1991,4 +2002,4 @@ texture2ddecoder = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "b04604bd4c5dac479d01074736620bdd1ee95f2742c4c5d9c35c74d2afbed116"
+content-hash = "16d5b25b9b8c15464aab8162470d76c7d278a74c4a6530332e2feb8522fc2404"

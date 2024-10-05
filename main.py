@@ -1,40 +1,28 @@
 import asyncio
-import time
+from asyncio import Future
 
-# import clandestino
-import numpy as np
-import pyautogui
-from PIL import ImageGrab
-from scapy.all import sniff
+from clandestino import clandestino
+from queue import Queue
 
-# from src.screen.teste import detect_movement
-# from src.tcp_reader.reader import TCPReader
+from src.orchestrator.paparovsck import Paparovisck
+from src.sniffer.sniffer import Sniffer
 
+async def main():
+    await clandestino.migrate_database()
 
-img1 = None
-def packet_callback(packet):
-    global img1
-    try:
-        _payload = bytes(packet["TCP"].payload)
-        if b'type.ankama' in _payload[:100]:
-            print()
-        if b"MapComplementaryInformationEvent" in _payload:
-            print(packet)
+    h = {312,345}
+    z = {3123,123}
 
-            # TCPReader(bytes(packet["TCP"].payload)).read()
-            time.sleep(0.75)
-            # img1 = ImageGrab.grab()
-            print("lala")
-        elif b"TeleportDestinationsEvent" in _payload:
-            print(packet)
-            time.sleep(2)
-            img2 = ImageGrab.grab()
-            # detect_movement(np.array(img1), np.array(img2))
-            print("q")
-    except Exception as error:
-        print(error)
+    _queue =  Queue()
+    _sniffer = Sniffer(queue=_queue)
+
+    _p = Paparovisck(queue=_queue, data={"zaaps": z, "harvestables": h})
+    _t = asyncio.Task(_p.play())
+    _sniffer.start()
+    await Future()
 
 
 if __name__ == "__main__":
-    # asyncio.run(clandestino.migrate_database())
-    sniff(filter="tcp", prn=packet_callback)
+    asyncio.run(main())
+
+

@@ -1,5 +1,8 @@
 from src.actions.base import BaseAction
-from src.interfaces.scheduler import IScheduler
+
+
+class IScheduler:
+    pass
 
 
 class BankScheduler(IScheduler):
