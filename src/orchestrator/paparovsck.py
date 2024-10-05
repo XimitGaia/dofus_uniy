@@ -13,7 +13,7 @@ from src.events.is_heavy import OverSizedEvent
 from src.events.map_change import MapChangeEvent
 from src.events.monster_location import MonsterLocationEvent
 from src.events.turn_start_event import TurnStartEvent
-from src.events.zaap_opened import OpenedZaapEvent, ZaapOpenedEvent
+from src.events.zaap_opened import ZaapOpenedEvent
 from src.model.state import State
 from src.schedulers.bank import BankScheduler
 from src.schedulers.fight import FightScheduler

@@ -29,11 +29,10 @@ class BotData:
                     map_id,
                     cell_id,
                     gfx_id,
-                    m_origin_x,
-                    m_origin_y,
-                    m_size_x,
-                    m_size_y
-                ) VALUES (?,?,?,?,?,?,?)
+                    interaction_id,
+                    offset_x,
+                    offset_y
+                ) VALUES (?,?,?,?,?,?)
             """
             cursor.executemany(sql, [i.as_tuple() for i in maps])
 

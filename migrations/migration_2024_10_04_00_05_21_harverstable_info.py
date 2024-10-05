@@ -45,14 +45,15 @@ def gen_harvestables(map_files_folder: Path, elements: Path, harvestables: Path)
                     _cell["data"]["gfxId"],
                     {"m_origin": {"x": 0, "y": 0}, "m_size": {"x": 0, "y": 0}},
                 )
+                _offset_x = int(_offset["m_origin"]["x"] + _offset["m_size"]["x"] / 2)
+                _offset_y = int(_offset["m_origin"]["y"] + _offset["m_size"]["y"] / 2)
                 yield HarverstableInfo(
                     int(_map_json_file["m_Name"].split("_")[-1]),
                     _cell["data"]["cellId"],
                     _cell["data"]["gfxId"],
-                    _offset["m_origin"]["x"],
-                    _offset["m_origin"]["y"],
-                    _offset["m_size"]["x"],
-                    _offset["m_size"]["y"],
+                    _cell["data"]["m_interactionId"],
+                    _offset_x,
+                    _offset_y,
                 )
 
 
@@ -86,10 +87,9 @@ class Migration(AbstractMigration):
                         map_id INTEGER NOT NULL,
                         cell_id INTEGER NOT NULL,
                         gfx_id INTEGER NOT NULL,
-                        m_origin_x INTEGER NOT NULL,
-                        m_origin_y INTEGER NOT NULL,
-                        m_size_x INTEGER NOT NULL,
-                        m_size_y INTEGER NOT NULL
+                        interaction_id INTEGER NOT NULL,
+                        offset_x INTEGER NOT NULL,
+                        offset_y INTEGER NOT NULL
                     )
                 """
             cursor.execute(sql)
