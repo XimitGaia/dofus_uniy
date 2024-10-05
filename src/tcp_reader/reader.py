@@ -1,6 +1,8 @@
 from pathlib import Path
 from uuid import uuid4
 
+from scapy.sendrecv import sniff
+
 from protobufer import proto_test_pb2
 import io
 
@@ -44,3 +46,11 @@ class TCPReader:
 
         _map = MapData(map_id=map_event.map_id, harverstables=_h)
         print(_map)
+
+
+if __name__ == "__main__":
+    def xxx(pkg):
+        _p = bytes(pkg["TCP"].payload)
+        if b"ComplementaryInfoEvent" in _p:
+            print(TCPReader(_p).read())
+    sniffer(filter="tcp", prn=xxx)
