@@ -3,6 +3,7 @@ syntax = "proto3";
 message MapComplementaryInformationEvent {
     uint32 subarea_id = 1;
     uint64 map_id = 2;
+    repeated House houses = 3;
     repeated ActorPositionInformation actors_position_information = 4;
     repeated InteractiveElement interactive_elements = 5;
     repeated StatedElement stated_elements = 6;
@@ -185,6 +186,70 @@ message MapComplementaryInformationEvent {
         ACTIVE = 1;
         INACTIVE = 2;
     }
+
+    message House {
+        int32 house_id = 1;
+        int32 model_id = 2;
+
+        oneof information {
+            HouseAccount house_account = 3;
+            HouseOnMap house_on_map = 4;
+            HouseInside house_inside = 5;
+            HouseGuild house_guild = 6;
+        }
+    }
+
+    message HouseAccount {
+        HouseInstance house_information = 1;
+        MapExtendedCoordinates coordinates = 2;
+    }
+
+    message HouseOnMap {
+        repeated int32 doors_on_map = 1;
+        repeated HouseInstance houses_information = 2;
+    }
+
+    message HouseInside {
+        HouseInstance house_information = 1;
+        MapCoordinates coordinates = 2;
+    }
+
+    message HouseGuild {
+        HouseInstance house_information = 1;
+        MapExtendedCoordinates coordinates = 2;
+        repeated int32 skills_id = 3;
+        int64 guild_share_params = 4;
+    }
+    message MapExtendedCoordinates {
+    int32 world_x = 1;
+    int32 world_y = 2;
+    int64 map_id = 3;
+    int32 sub_area_id = 4;
+}
+    message MapCoordinates {
+    int32 world_x = 1;
+
+    int32 world_y = 2;
+}
+    message HouseInstance {
+    int32 instance_id = 1;
+    bool second_hand = 2;
+    bool is_locked = 3;
+    AccountTag account_tag = 4;
+    bool has_owner = 5;
+    int64 price = 6;
+    bool is_sale_locked = 7;
+    bool is_admin_locked = 8;
+//    GuildInformation guild_information = 9;
+    int32 rooms_count = 10;
+    int32 chests_count = 11;
+    repeated int32 skills_id = 12;
+}
+    message AccountTag {
+    string nickname = 1;
+
+    string tag = 2;
+}
 }
 
 //TeleportDestinationsEvent
@@ -222,4 +287,33 @@ enum Teleporter {
 message InteractiveUseEndedEvent {
     int32 element_id = 1;
     int32 skill_id = 2;
+}
+//FightFighterShowEvent
+message FightFighterShowEvent {
+  bool static_pose = 2;
+}
+//FightEndEvent
+message FightEndEvent {
+    int32 duration = 1;
+    int32 rewardRate = 2;
+}
+//FightNewRoundEvent
+message FightNewRoundEvent {
+    int32 round_number = 1;
+}
+//MapMovementEvent
+message SequenceStartEvent {
+    int64 author_id = 2;
+}
+message MapMovementEvent {
+    repeated int32 cells = 1;
+    int32 direction = 2;
+    int64 character_id = 3;
+    bool cautious = 4;
+}
+//InventoryWeightEvent
+message InventoryWeightEvent {
+
+  int32 inventoryWeight = 1;
+  int32 weightMax = 2;
 }
