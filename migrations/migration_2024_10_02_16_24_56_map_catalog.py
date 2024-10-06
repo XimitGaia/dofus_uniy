@@ -9,7 +9,6 @@ from clandestino_sqlite.infra import SQLiteInfra
 from decouple import config
 
 
-
 def gen_map(map_files_folder: Path, worldgraph: Path, elements: Path):
     from src.model.map_data import MapRegister
 

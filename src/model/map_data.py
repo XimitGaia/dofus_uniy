@@ -48,6 +48,3 @@ class HarverstableInfo:
             self.offset_x,
             self.offset_y,
         )
-
-
-

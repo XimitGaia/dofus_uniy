@@ -7,8 +7,6 @@ from clandestino_sqlite.infra import SQLiteInfra
 from decouple import config
 
 
-
-
 async def insert_data():
     from src.model.map_data import Zaap
     from src.repository.bot import BotData
@@ -18,6 +16,7 @@ async def insert_data():
         _data = json.load(file)
         [buffer.append(Zaap(int(_id), name)) for _id, name in _data.items()]
     await BotData.save_zaap(buffer)
+
 
 class Migration(AbstractMigration):
 
@@ -51,4 +50,3 @@ class Migration(AbstractMigration):
                     DROP TABLE ZAAPS
                 """
             cursor.execute(sql)
-

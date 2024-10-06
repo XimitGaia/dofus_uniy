@@ -1,15 +1,36 @@
+from collections.abc import Callable
+from io import BytesIO
+from pathlib import Path
 from queue import Queue
 from socket import socket, AF_INET, SOCK_DGRAM
+from typing import Type
 
 from scapy.all import AsyncSniffer
+
+from src.events.base import BaseEvent
+from src.events.harvest_completed import HarvestCompletedEvent
+from src.events.map_change import MapChangeEvent
+from src.events.zaap_opened import ZaapOpenedEvent
+from src.tcp_reader.reader import TCPReader, map_events
 
 
 class Sniffer:
 
+    _sniff_for: dict[Type[BaseEvent], Callable] = [
+        MapChangeEvent,
+        ZaapOpenedEvent,
+        HarvestCompletedEvent,
+    ]
+
     def __init__(self, queue: Queue):
-        self.filter: str = f"tcp and dst host {self._get_network_ip()}"
+        self.filter: str = (
+            f"tcp and dst host {self._get_network_ip()} and tcp port 5555"
+        )
         self._sniffer = AsyncSniffer(filter=self.filter, prn=self._callback)
         self.queue: Queue = queue
+        self.tcp_reader = TCPReader()
+        self._counter = 0
+        self._buffer = b""
 
     @staticmethod
     def _get_network_ip():
@@ -23,8 +44,28 @@ class Sniffer:
 
     def _callback(self, packet):
         _payload = bytes(packet["TCP"].payload)
-        if b'type.ankama' in _payload[:100]:
-            self.queue.put(packet)
+        self._counter += 1
+        # print(_payload)
+        with open(
+            Path(f"./src/tcp_reader/tcp_chunks/{self._counter}").resolve(), "wb"
+        ) as file:
+            file.write(_payload)
+
+        if self._buffer:
+            self._buffer += _payload
+            _payload = self._buffer
+            self._buffer = b""
+
+        for event in map_events:
+            if event.get_signature() not in _payload:
+                continue
+            try:
+                self.tcp_reader.process(_payload, event)
+                print(self._counter)
+                self._buffer = b""
+            except:
+                self._buffer = _payload
+                print("\n\n @error# \n\n")
 
     def start(self):
         self._sniffer.start()

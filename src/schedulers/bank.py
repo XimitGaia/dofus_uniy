@@ -7,6 +7,5 @@ class IScheduler:
 
 class BankScheduler(IScheduler):
 
-
     def next(self) -> BaseAction:
         return BaseAction()

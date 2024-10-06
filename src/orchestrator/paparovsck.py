@@ -23,6 +23,7 @@ from src.schedulers.harvest import HarvestScheduler
 async def ccc(count: int) -> bool:
     return False
 
+
 class Paparovisck:
 
     def __init__(self, queue: Queue, data: dict):
@@ -75,7 +76,7 @@ class Paparovisck:
                 self._running_task = asyncio.Task(self._current_action.xxx())
                 await self._running_task
         except TimeoutError:
-            await self.execute_with_retry_and_timeout(current=current+1)
+            await self.execute_with_retry_and_timeout(current=current + 1)
         except CancelledError:
             pass
 
@@ -102,9 +103,7 @@ class Paparovisck:
     def _change_schedule(self, schedule: ScheduleType):
         self.current_schedule = schedule
 
-
     async def _execute_actions(self):
         while self._running:
             action: BaseAction = self.current_schedule.next()
             action.action()
-

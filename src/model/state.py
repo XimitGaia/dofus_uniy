@@ -30,16 +30,16 @@ class State:
 
     def watch(self, attribute: str, callback: Callable[[Any], Awaitable[bool]]) -> None:
         if attribute not in self._callbacks:
-            self._callbacks.update({
-                attribute: []
-            })
+            self._callbacks.update({attribute: []})
         self._callbacks[attribute].append(callback)
 
     async def _execute_callbacks(self, attribute: str):
         self._count += 1
         results = await asyncio.gather(
-            * [_callback(self._count)
-            for _callback in self._callbacks.get(attribute, [])]
+            *[
+                _callback(self._count)
+                for _callback in self._callbacks.get(attribute, [])
+            ]
         )
         for i, v in enumerate(results):
             if v:

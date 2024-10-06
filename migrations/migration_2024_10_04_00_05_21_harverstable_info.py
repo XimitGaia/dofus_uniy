@@ -6,7 +6,6 @@ from clandestino_interfaces import AbstractMigration
 from clandestino_sqlite.infra import SQLiteInfra, config
 
 
-
 def gen_harvestables(map_files_folder: Path, elements: Path, harvestables: Path):
     from src.model.map_data import HarverstableInfo
 
@@ -111,4 +110,3 @@ class Migration(AbstractMigration):
                     DROP TABLE HARVERTABLE_INFO
                 """
             cursor.execute(sql)
-

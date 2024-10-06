@@ -15,5 +15,3 @@ class HarvestScheduler:
         _state = State()
         _state
         return None
-
-    

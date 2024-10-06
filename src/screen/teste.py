@@ -22,11 +22,11 @@ def detect_movement(image1, image2):
     for contour in contours:
         if cv2.contourArea(contour) > 50000:  # Filtrar objetos pequenos
             (x, y, w, h) = cv2.boundingRect(contour)
-            _img = image2[y:y+h, x:x+w]
-            reader = easyocr.Reader(['en'])
+            _img = image2[y : y + h, x : x + w]
+            reader = easyocr.Reader(["en"])
 
             results = reader.readtext(_img)
-            for (bbox, text, prob) in results:
+            for bbox, text, prob in results:
                 print(text)
                 if "territory" in text.lower():
                     print("achou")
@@ -40,14 +40,14 @@ def detect_movement(image1, image2):
             break
     return image2
 
+
 if __name__ == "__main__":
     # Especificar o caminho das imagens que você quer testar
-    image_path1 = r'C:\Users\imxim\Documents\dofus_uniy\images\base2.png'  # Substitua com o caminho da sua primeira imagem
-    image_path2 = r'C:\Users\imxim\Documents\dofus_uniy\images\dif1.png'  # Substitua com o caminho da sua segunda imagem
+    image_path1 = r"C:\Users\imxim\Documents\dofus_uniy\images\base2.png"  # Substitua com o caminho da sua primeira imagem
+    image_path2 = r"C:\Users\imxim\Documents\dofus_uniy\images\dif1.png"  # Substitua com o caminho da sua segunda imagem
 
     # Carregar as imagens
     img1, img2 = load_images(image_path1, image_path2)
 
     # Detectar e desenhar objetos
     result_image = detect_movement(img1, img2)
-

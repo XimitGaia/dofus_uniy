@@ -1,6 +1,5 @@
 syntax = "proto3";
-
-
+//MapComplementaryInformationEvent
 message MapComplementaryInformationEvent {
     uint32 subarea_id = 1;
     uint64 map_id = 2;
@@ -186,4 +185,41 @@ message MapComplementaryInformationEvent {
         ACTIVE = 1;
         INACTIVE = 2;
     }
+}
+
+//TeleportDestinationsEvent
+message TeleportDestinationsEvent {
+    Teleporter type = 1;
+    repeated TeleportDestination destinations = 2;
+    int64 spawnMapId = 3;
+}
+message TeleportDestination {
+  enum ComplementaryInformationOneofCase {
+    NONE = 0;
+    ANOMALY = 6;
+  }
+  message Anomaly {
+    int32 bonusPourcentage = 1;
+    int64 remainingTime = 2;
+  }
+  Teleporter type = 1;
+  int64 mapId = 2;
+  int32 subareaId = 3;
+  int32 level = 4;
+  int32 cost = 5;
+  oneof complementaryInformation {
+    Anomaly anomaly = 6;
+  }
+}
+enum Teleporter {
+    TELEPORTER_ZAAP = 0;
+    TELEPORTER_SUBWAY = 1;
+    TELEPORTER_PRISM = 2;
+    TELEPORTER_HAVEN_BAG = 3;
+    TELEPORTER_ANOMALY = 4;
+}
+//InteractiveUseEndedEvent
+message InteractiveUseEndedEvent {
+    int32 element_id = 1;
+    int32 skill_id = 2;
 }

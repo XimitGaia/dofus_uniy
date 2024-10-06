@@ -65,7 +65,9 @@ class Resource(Goal):
             return CheckPodsAction(goal_callback=self.change_cluster_index)
 
         if self.routines[character_name]["action"] == "MOVE":
-            next_map = self.get_next_map(character_name=character_name, cluster_index=cluster_index)
+            next_map = self.get_next_map(
+                character_name=character_name, cluster_index=cluster_index
+            )
             self.routines[character_name]["action"] = "HARVEST"
             return MoveAction(map_id=next_map)
         else:
@@ -97,7 +99,9 @@ class Resource(Goal):
         self.routines[character_name]["clusters"][cluster_index]["maps_id"].append(
             next_map
         )
-        print(f'cluster rotation: {self.routines[character_name]["clusters"][cluster_index]["maps_id"]}')
+        print(
+            f'cluster rotation: {self.routines[character_name]["clusters"][cluster_index]["maps_id"]}'
+        )
         return next_map
 
     def create_battle(self, players):
@@ -160,9 +164,9 @@ class Resource(Goal):
                 and connection[3]
                 not in world_map_dict[connection[0]]["harvestable_quantity"]
             ):
-                world_map_dict[connection[0]]["harvestable_quantity"][
-                    connection[3]
-                ] = connection[2]
+                world_map_dict[connection[0]]["harvestable_quantity"][connection[3]] = (
+                    connection[2]
+                )
         return world_map_dict, harvestables_map
 
     def clusterise(
@@ -342,7 +346,9 @@ class Resource(Goal):
         cluster_maps = cluster.get("maps_id").copy()
         sorted_cluster_maps = [cluster_maps.pop(0)]
         while len(cluster_maps) > 0:
-            map_id = self.get_closest_map(map_id=sorted_cluster_maps[-1], possible_maps=cluster_maps)
+            map_id = self.get_closest_map(
+                map_id=sorted_cluster_maps[-1], possible_maps=cluster_maps
+            )
             # print(f"map_id: {sorted_cluster_maps[-1]}, closest_map: {map_id}, cluster: {cluster_maps}")
             cluster_maps.remove(map_id)
             sorted_cluster_maps.append(map_id)
@@ -354,7 +360,10 @@ class Resource(Goal):
         neighborhoods = [[map_id]]
         while True:
             last_neighborhoods = neighborhoods[-1]
-            next_neighborhoods = list(set(self.database.get_neighborhoods_by_map_id(last_neighborhoods)) - set(processed))
+            next_neighborhoods = list(
+                set(self.database.get_neighborhoods_by_map_id(last_neighborhoods))
+                - set(processed)
+            )
             intersection = list(set(next_neighborhoods) & set(possible_maps))
             if intersection:
                 random.shuffle(intersection)
