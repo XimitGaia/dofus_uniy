@@ -15,9 +15,8 @@ class BaseAction(ABC):
     timeout: int
     max_retry: int
 
-    async def _callback(self) -> bool:
-        self._t = True
-        return True
+    async def callback(self, value) -> bool:
+        pass
 
     @abstractmethod
     async def xxx(self):
