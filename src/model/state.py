@@ -81,7 +81,7 @@ class State:
         self._count += 1
         results = await asyncio.gather(
             *[
-                _callback(self._count)
+                _callback()
                 for _callback in self._callbacks.get(attribute, [])
             ]
         )
@@ -89,7 +89,7 @@ class State:
             if v:
                 self._callbacks[attribute].pop(i)
 
-    def on_event(self, event : BaseEvent ):
+    def on_event(self, event: BaseEvent):
         _map = {
             MapChangeEvent: self.map_change_event,
             ZaapOpenedEvent: self.zaap_open,

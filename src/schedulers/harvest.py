@@ -50,7 +50,6 @@ class HarvestScheduler:
         _schedule["schedule"].append(CollectHarvestableAction) # start_map
 
         for map in _deepest_path:
-            xxx =
             _schedule["schedule"].append(ChangeMapAction)
             _schedule["schedule"].append(CollectHarvestableAction)
 

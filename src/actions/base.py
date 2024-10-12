@@ -13,7 +13,7 @@ class BaseAction(ABC):
     timeout: int
     max_retry: int
 
-    async def callback(self, value) -> bool:
+    async def callback(self) -> bool:
         pass
     #
     # @abstractmethod

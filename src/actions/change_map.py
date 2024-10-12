@@ -21,10 +21,14 @@ class ChangeMapAction(BaseAction):
         while self.lock:
             await asyncio.sleep(0.1)
 
-    async def callback(self, value) -> bool:
+    async def callback(self) -> bool:
+        if self.lock == False:
+            return True
         _state = State()
         if _state.map_id == self.map_to:
             self.lock = False
+            return True
+        return False
 
     async def execute(self):
         _state = State()
