@@ -19,4 +19,5 @@ class ChangeMapAction(BaseAction):
 
     async def execute(self):
         _state = State()
-        moveTo(Screen().from_cell(cell_id=self.cell_id, offset_x=self.offset_x, offset_y=self.offset_y))
+        _x, _y = Screen().from_cell(cell_id=self.cell_id, offset_x=self.offset_x, offset_y=self.offset_y)
+        moveTo(x=_x, y=_y, duration=1.0)
