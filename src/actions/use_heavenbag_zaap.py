@@ -1,7 +1,7 @@
 from src.actions.base import BaseAction
 
 
-class UseHeavenBagZaapAction(BaseAction):
+class OpenZaapAction(BaseAction):
     max_retry = 3
     timeout = 5
 
