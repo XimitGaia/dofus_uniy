@@ -1,3 +1,4 @@
+import asyncio
 from pathlib import Path
 from pprint import pprint
 from typing import Type
@@ -8,12 +9,22 @@ from Cryptodome.Util.py3compat import BytesIO
 from protobufer import proto_test_pb2
 import io
 
+from src.events.bank_open_event import BankOpenEvent
 from src.events.base import BaseEvent
+from src.events.figth_ended import FightEndedEvent
+from src.events.figth_started import FightStartedEvent
 from src.events.harvest_completed import HarvestCompletedEvent
+from src.events.is_heavy import OverSizedEvent
 from src.events.map_change import MapChangeEvent
+from src.events.monster_location import MonsterLocationEvent
+from src.events.turn_start_event import TurnStartEvent
 from src.events.zaap_opened import ZaapOpenedEvent
+from src.model.exceptions import LostData
+from src.model.state import State
 
 map_events = {}
+
+
 
 
 def retry(fn, count: int = 0, stop: int = 3):
@@ -35,6 +46,12 @@ class TCPReader:
                 MapChangeEvent: self.map_change_event,
                 ZaapOpenedEvent: self.zaap_open,
                 HarvestCompletedEvent: self.harvest_completed,
+                FightStartedEvent: self.fight_started,
+                FightEndedEvent: self.fight_ended,
+                TurnStartEvent: self.turn_starts,
+                MonsterLocationEvent: self.monster_location,
+                OverSizedEvent: self.over_sized,
+                BankOpenEvent: self.bank_open,
             }
         )
 
@@ -42,20 +59,33 @@ class TCPReader:
         _stream = io.BytesIO(payload)
         try:
             _event = retry(lambda: map_events[event](stream=_stream))
-            print(_event)
-        except Exception as error:
+            State().on_event(_event)
+        except LostData as error:
+            raise error
+        except Exception:
+            _p = Path(f"./src/tcp_reader/tcp_chunks/{uuid4()}")
+            print(_p)
             with open(
-                Path(f"./src/tcp_reader/tcp_chunks/{uuid4()}").resolve(), "wb"
+                _p.resolve(), "wb"
             ) as file:
                 file.write(payload)
 
     @staticmethod
-    def map_change_event(stream: io.BytesIO):
+    def  map_change_event(stream: io.BytesIO):
         stream.seek(0)
-        stream.seek(107)
-        map_event = proto_test_pb2.MapComplementaryInformationEvent()
-        map_event.ParseFromString(stream.read())
-        return MapChangeEvent.from_proto(map_event)
+        _content =  stream.read()
+        stream.seek(0)
+        _read_size = None
+        _xxx = b"type.ankama.com/com.ankama.dofus.server.game.protocol.house.HousePropertiesEvent"
+        if _xxx in _content:
+            _read_size = len(_content.split(_xxx)[0]) - 117
+        try:
+            stream.seek(107)
+            map_event = proto_test_pb2.MapComplementaryInformationEvent()
+            map_event.ParseFromString(stream.read(_read_size))
+            return MapChangeEvent.from_proto(map_event)
+        except:
+            raise LostData()
 
     @staticmethod
     def zaap_open(stream: io.BytesIO):
@@ -73,17 +103,86 @@ class TCPReader:
         map_event.ParseFromString(stream.read())
         return HarvestCompletedEvent.from_proto(map_event)
 
+    @staticmethod
+    def fight_started(stream: io.BytesIO):
+        return FightStartedEvent(True)
+
+    @staticmethod
+    def fight_ended(stream: io.BytesIO):
+        return FightEndedEvent(True)
+
+    @staticmethod
+    def turn_starts(stream: io.BytesIO):
+        stream.seek(113)
+        map_event = proto_test_pb2.FightNewRoundEvent()
+        map_event.ParseFromString(stream.read())
+        return TurnStartEvent.from_proto(map_event)
+
+    @staticmethod
+    def monster_location(stream: io.BytesIO):
+        stream.seek(0)
+        _bytes = stream.read().split(b'\x1a')
+        # ;*
+        _chunk_data = list(filter(lambda x: MonsterLocationEvent.get_signature() in x, _bytes))
+        map_event = proto_test_pb2.MapMovementEvent()
+        _pos = []
+        for i in _chunk_data:
+            stream = io.BytesIO(b'\x1a' + i)
+            try:
+                stream.seek(0)
+                _size = len(stream.read())
+                stream.seek(0)
+                _stream = BytesIO(stream.read(_size - 1))
+                _stream.seek(86)
+                map_event.ParseFromString(_stream.read())
+                _pos.append(MonsterLocationEvent.from_proto(map_event))
+                continue
+            except:
+                pass
+
+            try:
+                stream.seek(86)
+                map_event.ParseFromString(stream.read())
+                _pos.append(MonsterLocationEvent.from_proto(map_event))
+                continue
+            except:
+                pass
+
+            try:
+                stream.seek(90)
+                map_event.ParseFromString(stream.read())
+                _pos.append(MonsterLocationEvent.from_proto(map_event))
+                continue
+            except:
+                pass
+
+        return _pos[-1] if _pos else MonsterLocationEvent(0)
+
+    @staticmethod
+    def over_sized(stream: io.BytesIO):
+        stream.seek(93)
+        map_event = proto_test_pb2.InventoryWeightEvent()
+        map_event.ParseFromString(stream.read())
+        return OverSizedEvent.from_proto(map_event)
+
+    @staticmethod
+    def bank_open(stream: io.BytesIO):
+        return BankOpenEvent(True)
 
 if __name__ == "__main__":
-    _data = b'\x8c\x04\x1a\x89\x04\n\x86\x04\n^type.ankama.com/com.ankama.dofus.server.game.protocol.gamemap.MapComplementaryInformationEvent\x12\xa3\x03\x08\xe2\x03\x10\x91\x86\x88*"\x86\x01\x08\x88\x87\xb4\xc1\xf0\t\x12\x02\x10T\x1ay\nG\x08\x9f\'\x1a\x0c\xa5\xaa\x84\x0e\xff\xb1\xe1\x1d\xa2\x81\xf4\x12"\x01U*1\x08\x02\x1a-\x08\x02\x12\x0b(\x93\x10\xb5 \xa1\x1c\x9f\x1c\xdc\x1b\x1a\x18\xf0\xe4\xb2\x0f\x80\x80\x80\x10\xc3\x85\xe0\x1f\x97\xc4\x83 \x8f\x96\x84/\xc2\xc9\x977"\x02\xa5\x01\x12.",\n\nWein-[Crc]\x12\x1e\n\x01\x0b\x1a\x02X\x01 \xbe\xb1\xef\x19*\x10\x08\x04 \xd0\x88\xb4\xc1\xf0\t(\xd0\x88\xb4\xc1\xf0\t""\x08\xde\xe3\xfe\xff\xff\xff\xff\xff\xff\x01\x12\x05\x10\x9a\x03\x18\x01\x1a\x0e\n\x05\x08%"\x01<\x12\x05:\x03\x08\xba7"#\x08\xdc\xe3\xfe\xff\xff\xff\xff\xff\xff\x01\x12\x05\x10\xb6\x03\x18\x07\x1a\x0f\n\x06\x08\x8e\x03"\x01F\x12\x05:\x03\x08\xc07""\x08\xdf\xe3\xfe\xff\xff\xff\xff\xff\xff\x01\x12\x05\x10\xb7\x03\x18\x01\x1a\x0e\n\x05\x08%"\x01<\x12\x05:\x03\x08\xba7" \x08\xe0\xe3\xfe\xff\xff\xff\xff\xff\xff\x01\x12\x05\x10\x9b\x03\x18\x03\x1a\x0c\n\x03\x08\xf2:\x12\x05:\x03\x08\x867*\x12\x08\xb0\xb7\x1e\x10C\x1a\x05\x08G\x10\xc4A(\x010\xc8\x01*\x11\x08\xb4\xae \x10\xbc\x02\x1a\x06\x08\xe8\x02\x10\xc6A(\x01*\x19\x08\x85\xae \x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x1a\x06\x08\xb8\x01\x10\xc5A(\x01*\x11\x08\x8f\xa9\x1e\x10\xff\x01\x1a\x05\x08E\x10\xbd/0\xc8\x01*\x0e\x08\xb6\xa2\x1e\x10\xff\x01"\x05\x08E\x10\xb1A2\x08\x08\xb0\xb7\x1e\x10d \x012\x07\x08\x8f\xa9\x1e\x10\xa8\x022\t\x08\xb6\xa2\x1e\x10\xa6\x04\x18\x01'
+    _data = b'lela\x12\x02\x08\x01\x18\xff\xff\xff\xff\xff\xff\xff\xff\xff\x012\x14\x08\x02\x12\x0e\x08\x02 \x8c\x87\xd0\xf0\x02(\x8c\x87\xd0\xf0\x02\x18\x0eX\x1aV\nT\nNtype.ankama.com/com.ankama.dofus.server.game.protocol.fight.FightNewRoundEvent\x12\x02\x08\x01d\x1ab\n`\nTtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.SequenceStartEvent\x12\x08\x08\x08\x10\x8a\x87\xd0\xf0\x02}\x1a{\ny\nVtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.GameActionFightEvent\x12\x1f\x08\xac\x02\x10\x8a\x87\xd0\xf0\x02\x82\x01\x13\x08\x8a\x87\xd0\xf0\x02\x10\xc8\x02(\x012\x06\x08\xc9\x91\x01\x10\x01\x90\x01\x1a\x8d\x01\n\x8a\x01\nVtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.GameActionFightEvent\x120\x08\xb6\x07\x10\x8a\x87\xd0\xf0\x02B%\n#\x08\x01\x10\x8a\x87\xd0\xf0\x02\x18\x98\xf8\xff\xff\xff\xff\xff\xff\xff\x01 \x02(\xc9\x91\x010\xf9\x94\x0fB\x04\x08\x01 bd\x1ab\n`\nRtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.SequenceEndEvent\x12\n\x08\x03\x10\x8a\x87\xd0\xf0\x02\x18\x08_\x1a]\n[\nQtype.ankama.com/com.ankama.dofus.server.game.protocol.fight.FightIsTurnReadyEvent\x12\x06\x08\x8a\x87\xd0\xf0\x02'
     _a = BytesIO(_data)
 
-    # with open(r"C:\Users\imxim\Documents\dofus_uniy\src\tcp_reader\tcp_chunks\final", "rb") as file:
-    #     _a = BytesIO(file.read())
+    # _a.seek(92)
+    # print(_dat1)
+    # print(_a.read())
+    # _a.seek(92)
+    # map_event = proto_test_pb2.MapMovementEvent()
+    # map_event.ParseFromString(_a.read())
+    # a = MonsterLocationEvent.from_proto(map_event)
 
-    _a.seek(107)
-    map_event = proto_test_pb2.MapComplementaryInformationEvent()
-    map_event.ParseFromString(_a.read())
-    print(map_event)
-    a = MapChangeEvent.from_proto(map_event)
+    # with open(r"C:\Users\imxim\Documents\dofus_uniy\src\tcp_reader\tcp_chunks\dd1ff116-adcb-4c43-bdfb-d91889c6f63e", "rb") as file:
+    #     _a = BytesIO(file.read())
+    # print(_a.read())
+    a = TCPReader.turn_starts(_a)
     print(a)

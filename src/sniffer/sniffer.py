@@ -6,21 +6,10 @@ from socket import socket, AF_INET, SOCK_DGRAM
 from typing import Type
 
 from scapy.all import AsyncSniffer
-
-from src.events.base import BaseEvent
-from src.events.harvest_completed import HarvestCompletedEvent
-from src.events.map_change import MapChangeEvent
-from src.events.zaap_opened import ZaapOpenedEvent
 from src.tcp_reader.reader import TCPReader, map_events
 
 
 class Sniffer:
-
-    _sniff_for: dict[Type[BaseEvent], Callable] = [
-        MapChangeEvent,
-        ZaapOpenedEvent,
-        HarvestCompletedEvent,
-    ]
 
     def __init__(self, queue: Queue):
         self.filter: str = (
@@ -51,17 +40,18 @@ class Sniffer:
         ) as file:
             file.write(_payload)
 
-        if self._buffer:
+        if b"type.ankama.com" not in _payload and self._buffer:
             self._buffer += _payload
             _payload = self._buffer
-            self._buffer = b""
+        self._buffer = b""
+
 
         for event in map_events:
             if event.get_signature() not in _payload:
                 continue
             try:
+                print(self._counter, event)
                 self.tcp_reader.process(_payload, event)
-                print(self._counter)
                 self._buffer = b""
             except:
                 self._buffer = _payload

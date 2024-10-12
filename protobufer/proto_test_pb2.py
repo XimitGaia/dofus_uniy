@@ -9,126 +9,216 @@ from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
-    _runtime_version.Domain.PUBLIC,
-    5,
-    28,
-    2,
-    '',
-    'proto_test.proto'
+    _runtime_version.Domain.PUBLIC, 5, 28, 2, "", "proto_test.proto"
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x10proto_test.proto\"\xf4\x35\n MapComplementaryInformationEvent\x12\x12\n\nsubarea_id\x18\x01 \x01(\r\x12\x0e\n\x06map_id\x18\x02 \x01(\x04\x12\x37\n\x06houses\x18\x03 \x03(\x0b\x32\'.MapComplementaryInformationEvent.House\x12_\n\x1b\x61\x63tors_position_information\x18\x04 \x03(\x0b\x32:.MapComplementaryInformationEvent.ActorPositionInformation\x12R\n\x14interactive_elements\x18\x05 \x03(\x0b\x32\x34.MapComplementaryInformationEvent.InteractiveElement\x12H\n\x0fstated_elements\x18\x06 \x03(\x0b\x32/.MapComplementaryInformationEvent.StatedElement\x12\x1f\n\x17has_aggressive_monsters\x18\t \x01(\x08\x1a\x93\x03\n\x12InteractiveElement\x12\x12\n\nelement_id\x18\x01 \x01(\x05\x12\x17\n\x0f\x65lement_type_id\x18\x02 \x01(\x05\x12\x64\n\x0e\x65nabled_skills\x18\x03 \x03(\x0b\x32L.MapComplementaryInformationEvent.InteractiveElement.InteractiveElementSkill\x12\x65\n\x0f\x64isabled_skills\x18\x04 \x03(\x0b\x32L.MapComplementaryInformationEvent.InteractiveElement.InteractiveElementSkill\x12\x16\n\x0eon_current_map\x18\x05 \x01(\x08\x12\x11\n\tage_bonus\x18\x06 \x01(\x05\x1aX\n\x17InteractiveElementSkill\x12\x10\n\x08skill_id\x18\x01 \x01(\x05\x12\x1a\n\x12skill_instance_uid\x18\x02 \x01(\x05\x12\x0f\n\x07name_id\x18\x03 \x01(\x05\x1a[\n\rStatedElement\x12\x12\n\nelement_id\x18\x01 \x01(\x05\x12\x0f\n\x07\x63\x65ll_id\x18\x02 \x01(\x05\x12\r\n\x05state\x18\x03 \x01(\x05\x12\x16\n\x0eon_current_map\x18\x04 \x01(\x08\x1a\xcd\"\n\x18\x41\x63torPositionInformation\x12\x10\n\x08\x61\x63tor_id\x18\x01 \x01(\x03\x12H\n\x0b\x64isposition\x18\x02 \x01(\x0e\x32\x33.MapComplementaryInformationEvent.EntityDisposition\x12\x66\n\x11\x61\x63tor_information\x18\x03 \x01(\x0b\x32K.MapComplementaryInformationEvent.ActorPositionInformation.ActorInformation\x1a\xf4\x02\n\x10\x41\x63torInformation\x12S\n\x04look\x18\x01 \x01(\x0b\x32\x45.MapComplementaryInformationEvent.ActorPositionInformation.EntityLook\x12\x63\n\x0frole_play_actor\x18\x02 \x01(\x0b\x32H.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActorH\x00\x12U\n\x07\x66ighter\x18\x03 \x01(\x0b\x32\x42.MapComplementaryInformationEvent.ActorPositionInformation.FighterH\x00\"@\n\x14InformationOneofCase\x12\x08\n\x04None\x10\x00\x12\x11\n\rRolePlayActor\x10\x02\x12\x0b\n\x07\x46ighter\x10\x03\x42\r\n\x0binformation\x1a\x89\x1c\n\rRolePlayActor\x12j\n\x0bnamed_actor\x18\x04 \x01(\x0b\x32S.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActorH\x00\x12y\n\x13monster_group_actor\x18\x06 \x01(\x0b\x32Z.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.MonsterGroupActorH\x00\x12\x1e\n\x14treasure_hunt_npc_id\x18\n \x01(\x05H\x00\x1a\xb0\x13\n\nNamedActor\x12\x0c\n\x04name\x18\x01 \x01(\t\x12|\n\x14humanoid_information\x18\x02 \x01(\x0b\x32\\.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.HumanoidH\x00\x12v\n\x11mount_information\x18\x03 \x01(\x0b\x32Y.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.MountH\x00\x1a\xe8\x10\n\x08Humanoid\x12y\n\x07options\x18\x03 \x03(\x0b\x32h.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption\x12\x12\n\naccount_id\x18\x04 \x01(\x03\x12\x8a\x01\n\x12mutant_information\x18\x06 \x01(\x0b\x32n.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.MutantInformation\x1a\x81\x0e\n\x0bHumanOption\x12\x87\x01\n\tfollowers\x18\x03 \x01(\x0b\x32r.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.FollowersH\x00\x12\x9c\x01\n\x14\x61lliance_information\x18\x05 \x01(\x0b\x32|.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.AllianceInformationH\x00\x12\x8c\x01\n\x0c\x65mote_option\x18\x06 \x01(\x0b\x32t.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.EmoteOptionH\x00\x12\x8c\x01\n\x0ctitle_option\x18\x07 \x01(\x0b\x32t.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.TitleOptionH\x00\x12\x92\x01\n\x0fornament_option\x18\x08 \x01(\x0b\x32w.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.OrnamentOptionH\x00\x12\x95\x01\n\x11object_use_option\x18\t \x01(\x0b\x32x.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.ObjectUseOptionH\x00\x12\x93\x01\n\x10skill_use_option\x18\n \x01(\x0b\x32w.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.SkillUseOptionH\x00\x12\x1a\n\x10speed_multiplier\x18\x0b \x01(\x02H\x00\x1a\xac\x01\n\tFollowers\x12\x9e\x01\n\x1a\x66ollowing_characters_looks\x18\x01 \x03(\x0b\x32z.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.IndexedEntityLook\x1aw\n\x11IndexedEntityLook\x12S\n\x04look\x18\x01 \x01(\x0b\x32\x45.MapComplementaryInformationEvent.ActorPositionInformation.EntityLook\x12\r\n\x05index\x18\x02 \x01(\x05\x1a\x15\n\x13\x41llianceInformation\x1a\x39\n\x0b\x45moteOption\x12\x10\n\x08\x65mote_id\x18\x01 \x01(\x05\x12\x18\n\x10\x65mote_start_time\x18\x02 \x01(\t\x1a\x38\n\x0bTitleOption\x12\x10\n\x08title_id\x18\x01 \x01(\x05\x12\x17\n\x0ftitle_parameter\x18\x02 \x01(\t\x1ag\n\x0eOrnamentOption\x12\x13\n\x0bornament_id\x18\x01 \x01(\x05\x12\x14\n\x0cplayer_level\x18\x02 \x01(\x05\x12\x11\n\tleague_id\x18\x03 \x01(\x05\x12\x17\n\x0fladder_position\x18\x04 \x01(\x05\x1aU\n\x0fObjectUseOption\x12\x1b\n\x13\x64\x65layed_action_type\x18\x01 \x01(\x05\x12\x11\n\tend_delay\x18\x02 \x01(\t\x12\x12\n\nobject_gid\x18\x03 \x01(\x05\x1aN\n\x0eSkillUseOption\x12\x12\n\nelement_id\x18\x01 \x01(\x05\x12\x10\n\x08skill_id\x18\x02 \x01(\x05\x12\x16\n\x0eskill_end_time\x18\x03 \x01(\tB\x08\n\x06option\x1a<\n\x11MutantInformation\x12\x12\n\nmonster_id\x18\x01 \x01(\x05\x12\x13\n\x0bpower_level\x18\x02 \x01(\x05\x1a*\n\x05Mount\x12\x12\n\nowner_name\x18\x01 \x01(\t\x12\r\n\x05level\x18\x02 \x01(\x05\x42\x07\n\x05\x61\x63tor\x1a\xb4\x06\n\x11MonsterGroupActor\x12\x90\x01\n\x0eidentification\x18\x01 \x01(\x0b\x32x.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.MonsterGroupActor.MonsterGroupStaticInformation\x12\x12\n\nloot_share\x18\x02 \x01(\x05\x1a\xb6\x01\n\x0fWaveInformation\x12\x12\n\nwave_count\x18\x01 \x01(\x05\x12\x8e\x01\n\x0c\x61lternatives\x18\x02 \x03(\x0b\x32x.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.MonsterGroupActor.MonsterGroupStaticInformation\x1a\xbe\x03\n\x1dMonsterGroupStaticInformation\x12\xaa\x01\n\rmain_creature\x18\x01 \x01(\x0b\x32\x92\x01.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.MonsterGroupActor.MonsterGroupStaticInformation.MonsterInGroupInformation\x12\xa7\x01\n\nunderlings\x18\x02 \x03(\x0b\x32\x92\x01.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.MonsterGroupActor.MonsterGroupStaticInformation.MonsterInGroupInformation\x1a\x46\n\x19MonsterInGroupInformation\x12\x0b\n\x03gid\x18\x01 \x01(\x05\x12\r\n\x05grade\x18\x02 \x01(\x05\x12\r\n\x05level\x18\x03 \x01(\x05\x42\x07\n\x05\x61\x63tor\x1a!\n\nEntityLook\x12\x13\n\x0b\x64\x65scription\x18\x01 \x01(\t\x1a\x1b\n\x07\x46ighter\x12\x10\n\x08strength\x18\x01 \x01(\x05\"\xa9\x01\n\x0e\x41\x63torOneofCase\x12\x08\n\x04NONE\x10\x00\x12\x0f\n\x0bNAMED_ACTOR\x10\x04\x12\x17\n\x13TAX_COLLECTOR_ACTOR\x10\x05\x12\x17\n\x13MONSTER_GROUP_ACTOR\x10\x06\x12\r\n\tNPC_ACTOR\x10\x07\x12\x0f\n\x0bPRISM_ACTOR\x10\x08\x12\x10\n\x0cPORTAL_ACTOR\x10\t\x12\x18\n\x14TREASURE_HUNT_NPC_ID\x10\n\x1a\xd5\x02\n\x05House\x12\x10\n\x08house_id\x18\x01 \x01(\x05\x12\x10\n\x08model_id\x18\x02 \x01(\x05\x12G\n\rhouse_account\x18\x03 \x01(\x0b\x32..MapComplementaryInformationEvent.HouseAccountH\x00\x12\x44\n\x0chouse_on_map\x18\x04 \x01(\x0b\x32,.MapComplementaryInformationEvent.HouseOnMapH\x00\x12\x45\n\x0chouse_inside\x18\x05 \x01(\x0b\x32-.MapComplementaryInformationEvent.HouseInsideH\x00\x12\x43\n\x0bhouse_guild\x18\x06 \x01(\x0b\x32,.MapComplementaryInformationEvent.HouseGuildH\x00\x42\r\n\x0binformation\x1a\xa9\x01\n\x0cHouseAccount\x12J\n\x11house_information\x18\x01 \x01(\x0b\x32/.MapComplementaryInformationEvent.HouseInstance\x12M\n\x0b\x63oordinates\x18\x02 \x01(\x0b\x32\x38.MapComplementaryInformationEvent.MapExtendedCoordinates\x1ao\n\nHouseOnMap\x12\x14\n\x0c\x64oors_on_map\x18\x01 \x03(\x05\x12K\n\x12houses_information\x18\x02 \x03(\x0b\x32/.MapComplementaryInformationEvent.HouseInstance\x1a\xa0\x01\n\x0bHouseInside\x12J\n\x11house_information\x18\x01 \x01(\x0b\x32/.MapComplementaryInformationEvent.HouseInstance\x12\x45\n\x0b\x63oordinates\x18\x02 \x01(\x0b\x32\x30.MapComplementaryInformationEvent.MapCoordinates\x1a\xd6\x01\n\nHouseGuild\x12J\n\x11house_information\x18\x01 \x01(\x0b\x32/.MapComplementaryInformationEvent.HouseInstance\x12M\n\x0b\x63oordinates\x18\x02 \x01(\x0b\x32\x38.MapComplementaryInformationEvent.MapExtendedCoordinates\x12\x11\n\tskills_id\x18\x03 \x03(\x05\x12\x1a\n\x12guild_share_params\x18\x04 \x01(\x03\x1a_\n\x16MapExtendedCoordinates\x12\x0f\n\x07world_x\x18\x01 \x01(\x05\x12\x0f\n\x07world_y\x18\x02 \x01(\x05\x12\x0e\n\x06map_id\x18\x03 \x01(\x03\x12\x13\n\x0bsub_area_id\x18\x04 \x01(\x05\x1a\x32\n\x0eMapCoordinates\x12\x0f\n\x07world_x\x18\x01 \x01(\x05\x12\x0f\n\x07world_y\x18\x02 \x01(\x05\x1a\xa0\x02\n\rHouseInstance\x12\x13\n\x0binstance_id\x18\x01 \x01(\x05\x12\x13\n\x0bsecond_hand\x18\x02 \x01(\x08\x12\x11\n\tis_locked\x18\x03 \x01(\x08\x12\x41\n\x0b\x61\x63\x63ount_tag\x18\x04 \x01(\x0b\x32,.MapComplementaryInformationEvent.AccountTag\x12\x11\n\thas_owner\x18\x05 \x01(\x08\x12\r\n\x05price\x18\x06 \x01(\x03\x12\x16\n\x0eis_sale_locked\x18\x07 \x01(\x08\x12\x17\n\x0fis_admin_locked\x18\x08 \x01(\x08\x12\x13\n\x0brooms_count\x18\n \x01(\x05\x12\x14\n\x0c\x63hests_count\x18\x0b \x01(\x05\x12\x11\n\tskills_id\x18\x0c \x03(\x05\x1a+\n\nAccountTag\x12\x10\n\x08nickname\x18\x01 \x01(\t\x12\x0b\n\x03tag\x18\x02 \x01(\t\":\n\x11\x45ntityDisposition\x12\x0b\n\x07UNKNOWN\x10\x00\x12\n\n\x06\x41\x43TIVE\x10\x01\x12\x0c\n\x08INACTIVE\x10\x02\"v\n\x19TeleportDestinationsEvent\x12\x19\n\x04type\x18\x01 \x01(\x0e\x32\x0b.Teleporter\x12*\n\x0c\x64\x65stinations\x18\x02 \x03(\x0b\x32\x14.TeleportDestination\x12\x12\n\nspawnMapId\x18\x03 \x01(\x03\"\xb4\x02\n\x13TeleportDestination\x12\x19\n\x04type\x18\x01 \x01(\x0e\x32\x0b.Teleporter\x12\r\n\x05mapId\x18\x02 \x01(\x03\x12\x11\n\tsubareaId\x18\x03 \x01(\x05\x12\r\n\x05level\x18\x04 \x01(\x05\x12\x0c\n\x04\x63ost\x18\x05 \x01(\x05\x12/\n\x07\x61nomaly\x18\x06 \x01(\x0b\x32\x1c.TeleportDestination.AnomalyH\x00\x1a:\n\x07\x41nomaly\x12\x18\n\x10\x62onusPourcentage\x18\x01 \x01(\x05\x12\x15\n\rremainingTime\x18\x02 \x01(\x03\":\n!ComplementaryInformationOneofCase\x12\x08\n\x04NONE\x10\x00\x12\x0b\n\x07\x41NOMALY\x10\x06\x42\x1a\n\x18\x63omplementaryInformation\"@\n\x18InteractiveUseEndedEvent\x12\x12\n\nelement_id\x18\x01 \x01(\x05\x12\x10\n\x08skill_id\x18\x02 \x01(\x05\",\n\x15\x46ightFighterShowEvent\x12\x13\n\x0bstatic_pose\x18\x02 \x01(\x08\"5\n\rFightEndEvent\x12\x10\n\x08\x64uration\x18\x01 \x01(\x05\x12\x12\n\nrewardRate\x18\x02 \x01(\x05\"*\n\x12\x46ightNewRoundEvent\x12\x14\n\x0cround_number\x18\x01 \x01(\x05\"\'\n\x12SequenceStartEvent\x12\x11\n\tauthor_id\x18\x02 \x01(\x03\"\\\n\x10MapMovementEvent\x12\r\n\x05\x63\x65lls\x18\x01 \x03(\x05\x12\x11\n\tdirection\x18\x02 \x01(\x05\x12\x14\n\x0c\x63haracter_id\x18\x03 \x01(\x03\x12\x10\n\x08\x63\x61utious\x18\x04 \x01(\x08\"B\n\x14InventoryWeightEvent\x12\x17\n\x0finventoryWeight\x18\x01 \x01(\x05\x12\x11\n\tweightMax\x18\x02 \x01(\x05*\x80\x01\n\nTeleporter\x12\x13\n\x0fTELEPORTER_ZAAP\x10\x00\x12\x15\n\x11TELEPORTER_SUBWAY\x10\x01\x12\x14\n\x10TELEPORTER_PRISM\x10\x02\x12\x18\n\x14TELEPORTER_HAVEN_BAG\x10\x03\x12\x16\n\x12TELEPORTER_ANOMALY\x10\x04\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b'\n\x10proto_test.proto"\xe5)\n MapComplementaryInformationEvent\x12\x12\n\nsubarea_id\x18\x01 \x01(\r\x12\x0e\n\x06map_id\x18\x02 \x01(\x04\x12_\n\x1b\x61\x63tors_position_information\x18\x04 \x03(\x0b\x32:.MapComplementaryInformationEvent.ActorPositionInformation\x12R\n\x14interactive_elements\x18\x05 \x03(\x0b\x32\x34.MapComplementaryInformationEvent.InteractiveElement\x12H\n\x0fstated_elements\x18\x06 \x03(\x0b\x32/.MapComplementaryInformationEvent.StatedElement\x12\x1f\n\x17has_aggressive_monsters\x18\t \x01(\x08\x1a\x93\x03\n\x12InteractiveElement\x12\x12\n\nelement_id\x18\x01 \x01(\x05\x12\x17\n\x0f\x65lement_type_id\x18\x02 \x01(\x05\x12\x64\n\x0e\x65nabled_skills\x18\x03 \x03(\x0b\x32L.MapComplementaryInformationEvent.InteractiveElement.InteractiveElementSkill\x12\x65\n\x0f\x64isabled_skills\x18\x04 \x03(\x0b\x32L.MapComplementaryInformationEvent.InteractiveElement.InteractiveElementSkill\x12\x16\n\x0eon_current_map\x18\x05 \x01(\x08\x12\x11\n\tage_bonus\x18\x06 \x01(\x05\x1aX\n\x17InteractiveElementSkill\x12\x10\n\x08skill_id\x18\x01 \x01(\x05\x12\x1a\n\x12skill_instance_uid\x18\x02 \x01(\x05\x12\x0f\n\x07name_id\x18\x03 \x01(\x05\x1a[\n\rStatedElement\x12\x12\n\nelement_id\x18\x01 \x01(\x05\x12\x0f\n\x07\x63\x65ll_id\x18\x02 \x01(\x05\x12\r\n\x05state\x18\x03 \x01(\x05\x12\x16\n\x0eon_current_map\x18\x04 \x01(\x08\x1a\xcd"\n\x18\x41\x63torPositionInformation\x12\x10\n\x08\x61\x63tor_id\x18\x01 \x01(\x03\x12H\n\x0b\x64isposition\x18\x02 \x01(\x0e\x32\x33.MapComplementaryInformationEvent.EntityDisposition\x12\x66\n\x11\x61\x63tor_information\x18\x03 \x01(\x0b\x32K.MapComplementaryInformationEvent.ActorPositionInformation.ActorInformation\x1a\xf4\x02\n\x10\x41\x63torInformation\x12S\n\x04look\x18\x01 \x01(\x0b\x32\x45.MapComplementaryInformationEvent.ActorPositionInformation.EntityLook\x12\x63\n\x0frole_play_actor\x18\x02 \x01(\x0b\x32H.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActorH\x00\x12U\n\x07\x66ighter\x18\x03 \x01(\x0b\x32\x42.MapComplementaryInformationEvent.ActorPositionInformation.FighterH\x00"@\n\x14InformationOneofCase\x12\x08\n\x04None\x10\x00\x12\x11\n\rRolePlayActor\x10\x02\x12\x0b\n\x07\x46ighter\x10\x03\x42\r\n\x0binformation\x1a\x89\x1c\n\rRolePlayActor\x12j\n\x0bnamed_actor\x18\x04 \x01(\x0b\x32S.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActorH\x00\x12y\n\x13monster_group_actor\x18\x06 \x01(\x0b\x32Z.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.MonsterGroupActorH\x00\x12\x1e\n\x14treasure_hunt_npc_id\x18\n \x01(\x05H\x00\x1a\xb0\x13\n\nNamedActor\x12\x0c\n\x04name\x18\x01 \x01(\t\x12|\n\x14humanoid_information\x18\x02 \x01(\x0b\x32\\.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.HumanoidH\x00\x12v\n\x11mount_information\x18\x03 \x01(\x0b\x32Y.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.MountH\x00\x1a\xe8\x10\n\x08Humanoid\x12y\n\x07options\x18\x03 \x03(\x0b\x32h.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption\x12\x12\n\naccount_id\x18\x04 \x01(\x03\x12\x8a\x01\n\x12mutant_information\x18\x06 \x01(\x0b\x32n.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.MutantInformation\x1a\x81\x0e\n\x0bHumanOption\x12\x87\x01\n\tfollowers\x18\x03 \x01(\x0b\x32r.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.FollowersH\x00\x12\x9c\x01\n\x14\x61lliance_information\x18\x05 \x01(\x0b\x32|.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.AllianceInformationH\x00\x12\x8c\x01\n\x0c\x65mote_option\x18\x06 \x01(\x0b\x32t.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.EmoteOptionH\x00\x12\x8c\x01\n\x0ctitle_option\x18\x07 \x01(\x0b\x32t.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.TitleOptionH\x00\x12\x92\x01\n\x0fornament_option\x18\x08 \x01(\x0b\x32w.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.OrnamentOptionH\x00\x12\x95\x01\n\x11object_use_option\x18\t \x01(\x0b\x32x.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.ObjectUseOptionH\x00\x12\x93\x01\n\x10skill_use_option\x18\n \x01(\x0b\x32w.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.SkillUseOptionH\x00\x12\x1a\n\x10speed_multiplier\x18\x0b \x01(\x02H\x00\x1a\xac\x01\n\tFollowers\x12\x9e\x01\n\x1a\x66ollowing_characters_looks\x18\x01 \x03(\x0b\x32z.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.NamedActor.Humanoid.HumanOption.IndexedEntityLook\x1aw\n\x11IndexedEntityLook\x12S\n\x04look\x18\x01 \x01(\x0b\x32\x45.MapComplementaryInformationEvent.ActorPositionInformation.EntityLook\x12\r\n\x05index\x18\x02 \x01(\x05\x1a\x15\n\x13\x41llianceInformation\x1a\x39\n\x0b\x45moteOption\x12\x10\n\x08\x65mote_id\x18\x01 \x01(\x05\x12\x18\n\x10\x65mote_start_time\x18\x02 \x01(\t\x1a\x38\n\x0bTitleOption\x12\x10\n\x08title_id\x18\x01 \x01(\x05\x12\x17\n\x0ftitle_parameter\x18\x02 \x01(\t\x1ag\n\x0eOrnamentOption\x12\x13\n\x0bornament_id\x18\x01 \x01(\x05\x12\x14\n\x0cplayer_level\x18\x02 \x01(\x05\x12\x11\n\tleague_id\x18\x03 \x01(\x05\x12\x17\n\x0fladder_position\x18\x04 \x01(\x05\x1aU\n\x0fObjectUseOption\x12\x1b\n\x13\x64\x65layed_action_type\x18\x01 \x01(\x05\x12\x11\n\tend_delay\x18\x02 \x01(\t\x12\x12\n\nobject_gid\x18\x03 \x01(\x05\x1aN\n\x0eSkillUseOption\x12\x12\n\nelement_id\x18\x01 \x01(\x05\x12\x10\n\x08skill_id\x18\x02 \x01(\x05\x12\x16\n\x0eskill_end_time\x18\x03 \x01(\tB\x08\n\x06option\x1a<\n\x11MutantInformation\x12\x12\n\nmonster_id\x18\x01 \x01(\x05\x12\x13\n\x0bpower_level\x18\x02 \x01(\x05\x1a*\n\x05Mount\x12\x12\n\nowner_name\x18\x01 \x01(\t\x12\r\n\x05level\x18\x02 \x01(\x05\x42\x07\n\x05\x61\x63tor\x1a\xb4\x06\n\x11MonsterGroupActor\x12\x90\x01\n\x0eidentification\x18\x01 \x01(\x0b\x32x.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.MonsterGroupActor.MonsterGroupStaticInformation\x12\x12\n\nloot_share\x18\x02 \x01(\x05\x1a\xb6\x01\n\x0fWaveInformation\x12\x12\n\nwave_count\x18\x01 \x01(\x05\x12\x8e\x01\n\x0c\x61lternatives\x18\x02 \x03(\x0b\x32x.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.MonsterGroupActor.MonsterGroupStaticInformation\x1a\xbe\x03\n\x1dMonsterGroupStaticInformation\x12\xaa\x01\n\rmain_creature\x18\x01 \x01(\x0b\x32\x92\x01.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.MonsterGroupActor.MonsterGroupStaticInformation.MonsterInGroupInformation\x12\xa7\x01\n\nunderlings\x18\x02 \x03(\x0b\x32\x92\x01.MapComplementaryInformationEvent.ActorPositionInformation.RolePlayActor.MonsterGroupActor.MonsterGroupStaticInformation.MonsterInGroupInformation\x1a\x46\n\x19MonsterInGroupInformation\x12\x0b\n\x03gid\x18\x01 \x01(\x05\x12\r\n\x05grade\x18\x02 \x01(\x05\x12\r\n\x05level\x18\x03 \x01(\x05\x42\x07\n\x05\x61\x63tor\x1a!\n\nEntityLook\x12\x13\n\x0b\x64\x65scription\x18\x01 \x01(\t\x1a\x1b\n\x07\x46ighter\x12\x10\n\x08strength\x18\x01 \x01(\x05"\xa9\x01\n\x0e\x41\x63torOneofCase\x12\x08\n\x04NONE\x10\x00\x12\x0f\n\x0bNAMED_ACTOR\x10\x04\x12\x17\n\x13TAX_COLLECTOR_ACTOR\x10\x05\x12\x17\n\x13MONSTER_GROUP_ACTOR\x10\x06\x12\r\n\tNPC_ACTOR\x10\x07\x12\x0f\n\x0bPRISM_ACTOR\x10\x08\x12\x10\n\x0cPORTAL_ACTOR\x10\t\x12\x18\n\x14TREASURE_HUNT_NPC_ID\x10\n":\n\x11\x45ntityDisposition\x12\x0b\n\x07UNKNOWN\x10\x00\x12\n\n\x06\x41\x43TIVE\x10\x01\x12\x0c\n\x08INACTIVE\x10\x02"v\n\x19TeleportDestinationsEvent\x12\x19\n\x04type\x18\x01 \x01(\x0e\x32\x0b.Teleporter\x12*\n\x0c\x64\x65stinations\x18\x02 \x03(\x0b\x32\x14.TeleportDestination\x12\x12\n\nspawnMapId\x18\x03 \x01(\x03"\xb4\x02\n\x13TeleportDestination\x12\x19\n\x04type\x18\x01 \x01(\x0e\x32\x0b.Teleporter\x12\r\n\x05mapId\x18\x02 \x01(\x03\x12\x11\n\tsubareaId\x18\x03 \x01(\x05\x12\r\n\x05level\x18\x04 \x01(\x05\x12\x0c\n\x04\x63ost\x18\x05 \x01(\x05\x12/\n\x07\x61nomaly\x18\x06 \x01(\x0b\x32\x1c.TeleportDestination.AnomalyH\x00\x1a:\n\x07\x41nomaly\x12\x18\n\x10\x62onusPourcentage\x18\x01 \x01(\x05\x12\x15\n\rremainingTime\x18\x02 \x01(\x03":\n!ComplementaryInformationOneofCase\x12\x08\n\x04NONE\x10\x00\x12\x0b\n\x07\x41NOMALY\x10\x06\x42\x1a\n\x18\x63omplementaryInformation"@\n\x18InteractiveUseEndedEvent\x12\x12\n\nelement_id\x18\x01 \x01(\x05\x12\x10\n\x08skill_id\x18\x02 \x01(\x05",\n\x15\x46ightFighterShowEvent\x12\x13\n\x0bstatic_pose\x18\x02 \x01(\x08"5\n\rFightEndEvent\x12\x10\n\x08\x64uration\x18\x01 \x01(\x05\x12\x12\n\nrewardRate\x18\x02 \x01(\x05"*\n\x12\x46ightNewRoundEvent\x12\x14\n\x0cround_number\x18\x01 \x01(\x05"\'\n\x12SequenceStartEvent\x12\x11\n\tauthor_id\x18\x02 \x01(\x03"\\\n\x10MapMovementEvent\x12\r\n\x05\x63\x65lls\x18\x01 \x03(\x05\x12\x11\n\tdirection\x18\x02 \x01(\x05\x12\x14\n\x0c\x63haracter_id\x18\x03 \x01(\x03\x12\x10\n\x08\x63\x61utious\x18\x04 \x01(\x08"B\n\x14InventoryWeightEvent\x12\x17\n\x0finventoryWeight\x18\x01 \x01(\x05\x12\x11\n\tweightMax\x18\x02 \x01(\x05*\x80\x01\n\nTeleporter\x12\x13\n\x0fTELEPORTER_ZAAP\x10\x00\x12\x15\n\x11TELEPORTER_SUBWAY\x10\x01\x12\x14\n\x10TELEPORTER_PRISM\x10\x02\x12\x18\n\x14TELEPORTER_HAVEN_BAG\x10\x03\x12\x16\n\x12TELEPORTER_ANOMALY\x10\x04\x62\x06proto3'
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto_test_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "proto_test_pb2", _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-  DESCRIPTOR._loaded_options = None
-  _globals['_TELEPORTER']._serialized_start=7769
-  _globals['_TELEPORTER']._serialized_end=7897
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT']._serialized_start=21
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT']._serialized_end=6921
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_INTERACTIVEELEMENT']._serialized_start=439
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_INTERACTIVEELEMENT']._serialized_end=842
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_INTERACTIVEELEMENT_INTERACTIVEELEMENTSKILL']._serialized_start=754
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_INTERACTIVEELEMENT_INTERACTIVEELEMENTSKILL']._serialized_end=842
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_STATEDELEMENT']._serialized_start=844
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_STATEDELEMENT']._serialized_end=935
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION']._serialized_start=938
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION']._serialized_end=5367
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORINFORMATION']._serialized_start=1163
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORINFORMATION']._serialized_end=1535
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORINFORMATION_INFORMATIONONEOFCASE']._serialized_start=1456
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORINFORMATION_INFORMATIONONEOFCASE']._serialized_end=1520
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR']._serialized_start=1538
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR']._serialized_end=5131
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR']._serialized_start=1819
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR']._serialized_end=4299
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID']._serialized_start=2094
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID']._serialized_end=4246
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION']._serialized_start=2391
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION']._serialized_end=4184
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_FOLLOWERS']._serialized_start=3469
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_FOLLOWERS']._serialized_end=3641
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_INDEXEDENTITYLOOK']._serialized_start=3643
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_INDEXEDENTITYLOOK']._serialized_end=3762
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_ALLIANCEINFORMATION']._serialized_start=3764
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_ALLIANCEINFORMATION']._serialized_end=3785
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_EMOTEOPTION']._serialized_start=3787
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_EMOTEOPTION']._serialized_end=3844
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_TITLEOPTION']._serialized_start=3846
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_TITLEOPTION']._serialized_end=3902
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_ORNAMENTOPTION']._serialized_start=3904
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_ORNAMENTOPTION']._serialized_end=4007
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_OBJECTUSEOPTION']._serialized_start=4009
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_OBJECTUSEOPTION']._serialized_end=4094
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_SKILLUSEOPTION']._serialized_start=4096
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_SKILLUSEOPTION']._serialized_end=4174
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_MUTANTINFORMATION']._serialized_start=4186
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_MUTANTINFORMATION']._serialized_end=4246
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_MOUNT']._serialized_start=4248
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_MOUNT']._serialized_end=4290
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR']._serialized_start=4302
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR']._serialized_end=5122
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_WAVEINFORMATION']._serialized_start=4491
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_WAVEINFORMATION']._serialized_end=4673
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_MONSTERGROUPSTATICINFORMATION']._serialized_start=4676
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_MONSTERGROUPSTATICINFORMATION']._serialized_end=5122
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_MONSTERGROUPSTATICINFORMATION_MONSTERINGROUPINFORMATION']._serialized_start=5052
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_MONSTERGROUPSTATICINFORMATION_MONSTERINGROUPINFORMATION']._serialized_end=5122
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ENTITYLOOK']._serialized_start=5133
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ENTITYLOOK']._serialized_end=5166
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_FIGHTER']._serialized_start=5168
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_FIGHTER']._serialized_end=5195
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORONEOFCASE']._serialized_start=5198
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORONEOFCASE']._serialized_end=5367
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSE']._serialized_start=5370
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSE']._serialized_end=5711
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSEACCOUNT']._serialized_start=5714
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSEACCOUNT']._serialized_end=5883
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSEONMAP']._serialized_start=5885
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSEONMAP']._serialized_end=5996
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSEINSIDE']._serialized_start=5999
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSEINSIDE']._serialized_end=6159
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSEGUILD']._serialized_start=6162
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSEGUILD']._serialized_end=6376
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_MAPEXTENDEDCOORDINATES']._serialized_start=6378
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_MAPEXTENDEDCOORDINATES']._serialized_end=6473
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_MAPCOORDINATES']._serialized_start=6475
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_MAPCOORDINATES']._serialized_end=6525
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSEINSTANCE']._serialized_start=6528
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_HOUSEINSTANCE']._serialized_end=6816
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACCOUNTTAG']._serialized_start=6818
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ACCOUNTTAG']._serialized_end=6861
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ENTITYDISPOSITION']._serialized_start=6863
-  _globals['_MAPCOMPLEMENTARYINFORMATIONEVENT_ENTITYDISPOSITION']._serialized_end=6921
-  _globals['_TELEPORTDESTINATIONSEVENT']._serialized_start=6923
-  _globals['_TELEPORTDESTINATIONSEVENT']._serialized_end=7041
-  _globals['_TELEPORTDESTINATION']._serialized_start=7044
-  _globals['_TELEPORTDESTINATION']._serialized_end=7352
-  _globals['_TELEPORTDESTINATION_ANOMALY']._serialized_start=7206
-  _globals['_TELEPORTDESTINATION_ANOMALY']._serialized_end=7264
-  _globals['_TELEPORTDESTINATION_COMPLEMENTARYINFORMATIONONEOFCASE']._serialized_start=7266
-  _globals['_TELEPORTDESTINATION_COMPLEMENTARYINFORMATIONONEOFCASE']._serialized_end=7324
-  _globals['_INTERACTIVEUSEENDEDEVENT']._serialized_start=7354
-  _globals['_INTERACTIVEUSEENDEDEVENT']._serialized_end=7418
-  _globals['_FIGHTFIGHTERSHOWEVENT']._serialized_start=7420
-  _globals['_FIGHTFIGHTERSHOWEVENT']._serialized_end=7464
-  _globals['_FIGHTENDEVENT']._serialized_start=7466
-  _globals['_FIGHTENDEVENT']._serialized_end=7519
-  _globals['_FIGHTNEWROUNDEVENT']._serialized_start=7521
-  _globals['_FIGHTNEWROUNDEVENT']._serialized_end=7563
-  _globals['_SEQUENCESTARTEVENT']._serialized_start=7565
-  _globals['_SEQUENCESTARTEVENT']._serialized_end=7604
-  _globals['_MAPMOVEMENTEVENT']._serialized_start=7606
-  _globals['_MAPMOVEMENTEVENT']._serialized_end=7698
-  _globals['_INVENTORYWEIGHTEVENT']._serialized_start=7700
-  _globals['_INVENTORYWEIGHTEVENT']._serialized_end=7766
+    DESCRIPTOR._loaded_options = None
+    _globals["_TELEPORTER"]._serialized_start = 6218
+    _globals["_TELEPORTER"]._serialized_end = 6346
+    _globals["_MAPCOMPLEMENTARYINFORMATIONEVENT"]._serialized_start = 21
+    _globals["_MAPCOMPLEMENTARYINFORMATIONEVENT"]._serialized_end = 5370
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_INTERACTIVEELEMENT"
+    ]._serialized_start = 382
+    _globals["_MAPCOMPLEMENTARYINFORMATIONEVENT_INTERACTIVEELEMENT"]._serialized_end = (
+        785
+    )
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_INTERACTIVEELEMENT_INTERACTIVEELEMENTSKILL"
+    ]._serialized_start = 697
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_INTERACTIVEELEMENT_INTERACTIVEELEMENTSKILL"
+    ]._serialized_end = 785
+    _globals["_MAPCOMPLEMENTARYINFORMATIONEVENT_STATEDELEMENT"]._serialized_start = 787
+    _globals["_MAPCOMPLEMENTARYINFORMATIONEVENT_STATEDELEMENT"]._serialized_end = 878
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION"
+    ]._serialized_start = 881
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION"
+    ]._serialized_end = 5310
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORINFORMATION"
+    ]._serialized_start = 1106
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORINFORMATION"
+    ]._serialized_end = 1478
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORINFORMATION_INFORMATIONONEOFCASE"
+    ]._serialized_start = 1399
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORINFORMATION_INFORMATIONONEOFCASE"
+    ]._serialized_end = 1463
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR"
+    ]._serialized_start = 1481
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR"
+    ]._serialized_end = 5074
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR"
+    ]._serialized_start = 1762
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR"
+    ]._serialized_end = 4242
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID"
+    ]._serialized_start = 2037
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID"
+    ]._serialized_end = 4189
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION"
+    ]._serialized_start = 2334
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION"
+    ]._serialized_end = 4127
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_FOLLOWERS"
+    ]._serialized_start = 3412
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_FOLLOWERS"
+    ]._serialized_end = 3584
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_INDEXEDENTITYLOOK"
+    ]._serialized_start = 3586
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_INDEXEDENTITYLOOK"
+    ]._serialized_end = 3705
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_ALLIANCEINFORMATION"
+    ]._serialized_start = 3707
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_ALLIANCEINFORMATION"
+    ]._serialized_end = 3728
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_EMOTEOPTION"
+    ]._serialized_start = 3730
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_EMOTEOPTION"
+    ]._serialized_end = 3787
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_TITLEOPTION"
+    ]._serialized_start = 3789
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_TITLEOPTION"
+    ]._serialized_end = 3845
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_ORNAMENTOPTION"
+    ]._serialized_start = 3847
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_ORNAMENTOPTION"
+    ]._serialized_end = 3950
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_OBJECTUSEOPTION"
+    ]._serialized_start = 3952
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_OBJECTUSEOPTION"
+    ]._serialized_end = 4037
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_SKILLUSEOPTION"
+    ]._serialized_start = 4039
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_HUMANOPTION_SKILLUSEOPTION"
+    ]._serialized_end = 4117
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_MUTANTINFORMATION"
+    ]._serialized_start = 4129
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_HUMANOID_MUTANTINFORMATION"
+    ]._serialized_end = 4189
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_MOUNT"
+    ]._serialized_start = 4191
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_NAMEDACTOR_MOUNT"
+    ]._serialized_end = 4233
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR"
+    ]._serialized_start = 4245
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR"
+    ]._serialized_end = 5065
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_WAVEINFORMATION"
+    ]._serialized_start = 4434
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_WAVEINFORMATION"
+    ]._serialized_end = 4616
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_MONSTERGROUPSTATICINFORMATION"
+    ]._serialized_start = 4619
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_MONSTERGROUPSTATICINFORMATION"
+    ]._serialized_end = 5065
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_MONSTERGROUPSTATICINFORMATION_MONSTERINGROUPINFORMATION"
+    ]._serialized_start = 4995
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ROLEPLAYACTOR_MONSTERGROUPACTOR_MONSTERGROUPSTATICINFORMATION_MONSTERINGROUPINFORMATION"
+    ]._serialized_end = 5065
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ENTITYLOOK"
+    ]._serialized_start = 5076
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ENTITYLOOK"
+    ]._serialized_end = 5109
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_FIGHTER"
+    ]._serialized_start = 5111
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_FIGHTER"
+    ]._serialized_end = 5138
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORONEOFCASE"
+    ]._serialized_start = 5141
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ACTORPOSITIONINFORMATION_ACTORONEOFCASE"
+    ]._serialized_end = 5310
+    _globals[
+        "_MAPCOMPLEMENTARYINFORMATIONEVENT_ENTITYDISPOSITION"
+    ]._serialized_start = 5312
+    _globals["_MAPCOMPLEMENTARYINFORMATIONEVENT_ENTITYDISPOSITION"]._serialized_end = (
+        5370
+    )
+    _globals["_TELEPORTDESTINATIONSEVENT"]._serialized_start = 5372
+    _globals["_TELEPORTDESTINATIONSEVENT"]._serialized_end = 5490
+    _globals["_TELEPORTDESTINATION"]._serialized_start = 5493
+    _globals["_TELEPORTDESTINATION"]._serialized_end = 5801
+    _globals["_TELEPORTDESTINATION_ANOMALY"]._serialized_start = 5655
+    _globals["_TELEPORTDESTINATION_ANOMALY"]._serialized_end = 5713
+    _globals[
+        "_TELEPORTDESTINATION_COMPLEMENTARYINFORMATIONONEOFCASE"
+    ]._serialized_start = 5715
+    _globals[
+        "_TELEPORTDESTINATION_COMPLEMENTARYINFORMATIONONEOFCASE"
+    ]._serialized_end = 5773
+    _globals["_INTERACTIVEUSEENDEDEVENT"]._serialized_start = 5803
+    _globals["_INTERACTIVEUSEENDEDEVENT"]._serialized_end = 5867
+    _globals["_FIGHTFIGHTERSHOWEVENT"]._serialized_start = 5869
+    _globals["_FIGHTFIGHTERSHOWEVENT"]._serialized_end = 5913
+    _globals["_FIGHTENDEVENT"]._serialized_start = 5915
+    _globals["_FIGHTENDEVENT"]._serialized_end = 5968
+    _globals["_FIGHTNEWROUNDEVENT"]._serialized_start = 5970
+    _globals["_FIGHTNEWROUNDEVENT"]._serialized_end = 6012
+    _globals["_SEQUENCESTARTEVENT"]._serialized_start = 6014
+    _globals["_SEQUENCESTARTEVENT"]._serialized_end = 6053
+    _globals["_MAPMOVEMENTEVENT"]._serialized_start = 6055
+    _globals["_MAPMOVEMENTEVENT"]._serialized_end = 6147
+    _globals["_INVENTORYWEIGHTEVENT"]._serialized_start = 6149
+    _globals["_INVENTORYWEIGHTEVENT"]._serialized_end = 6215
 # @@protoc_insertion_point(module_scope)
