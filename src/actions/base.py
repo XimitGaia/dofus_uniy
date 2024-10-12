@@ -15,16 +15,16 @@ class BaseAction(ABC):
     timeout: int
     max_retry: int
 
-    async def callback(self, value) -> bool:
-        pass
-
-    @abstractmethod
-    async def xxx(self):
-        _state = State()
-        _state.watch("map_id", self.callback)
-        pyautogui.click(0,0)
-        while self._t is False:
-            await asyncio.sleep(0.5)
+    # async def callback(self, value) -> bool:
+    #     pass
+    #
+    # @abstractmethod
+    # async def xxx(self):
+    #     _state = State()
+    #     _state.watch("map_id", self.callback)
+    #     pyautogui.click(0,0)
+    #     while self._t is False:
+    #         await asyncio.sleep(0.5)
 
 
 class ChangeSchedulerAction(BaseAction):

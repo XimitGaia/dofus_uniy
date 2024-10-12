@@ -1,4 +1,5 @@
 import asyncio
+import random
 
 from clandestino_sqlite.infra import SQLiteInfra
 
@@ -90,6 +91,17 @@ class BotData:
             result = cursor.execute(sql, _to_replace)
             _maps = [i[0] for i in result.fetchall()]
             return set(_maps)
+
+    @classmethod
+    async def find_connectors(cls, map_id_from: int, map_id_to: int) -> list[tuple]:
+        async with cls._infra.get_cursor() as cursor:
+            sql = f"""
+            SELECT map_id_from, map_id_to, cell_id, offset_x, offset_y FROM 'MAP_CATALOG'
+            WHERE map_id_to = {map_id_to}
+            AND map_id_from = {map_id_from}
+            """
+            result = cursor.execute(sql)
+            return random.choice(result)
 
 
 if __name__ == "__main__":
