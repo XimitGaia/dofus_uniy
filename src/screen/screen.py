@@ -2,11 +2,11 @@ import json
 import time
 from dataclasses import dataclass
 
-import meeseeks
 import pyautogui
 from PIL import ImageGrab
 
-@meeseeks.OnlyOne()
+
+@dataclass(frozen=True, slots=True)
 class Screen:
     screen_size: tuple[int, int]
     gameplay_screen: tuple[int, int, int, int]
@@ -15,7 +15,8 @@ class Screen:
     # height_const: float = 0.87555
     # width_const: float = 1.425 * height_const
 
-    def __init__(self):
+    @classmethod
+    def new(cls):
         height_const: float = 0.87555
         width_const: float = 1.425 * height_const
         screen_img = ImageGrab.grab()
@@ -24,10 +25,17 @@ class Screen:
         _gameplay_width = _height * width_const
         _gameplay_height = _height * height_const
         _x_offset = (_width - _gameplay_width) / 2
-        self.cell_width = _gameplay_width / 14.5
-        self.cell_height = _gameplay_height / 20.5
-        self.screen_size = (int(_width), int(_height))
-        self.gameplay_screen = (int(_x_offset), 0, int(_x_offset + _gameplay_width), int(_gameplay_height))
+        return Screen(
+            cell_width=_gameplay_width / 14.5,
+            cell_height=_gameplay_height / 20.5,
+            screen_size=(int(_width), int(_height)),
+            gameplay_screen=(
+                int(_x_offset),
+                0,
+                int(_x_offset + _gameplay_width),
+                int(_gameplay_height),
+            ),
+        )
 
     def from_cell(self, cell_id: int, offset_x: float = 0, offset_y: float = 0):
         _row = cell_id // 14
