@@ -20,7 +20,7 @@ class MapChangeEvent(BaseEvent):
 
     @staticmethod
     def get_signature() -> bytes:
-        return b"MapComplementaryInformationEvent"
+        return b"igr"
 
     @classmethod
     def from_proto(cls, proto) -> Self:

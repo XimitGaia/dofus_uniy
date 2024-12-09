@@ -10,7 +10,7 @@ class BankOpenEvent(BaseEvent):
 
     @staticmethod
     def get_signature() -> bytes:
-        return b"ExchangeStartedWithStorageEvent"
+        return b"ipa"
 
     @classmethod
     def from_proto(cls, _) -> Self:

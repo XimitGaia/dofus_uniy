@@ -1,0 +1,3 @@
+
+class LostData(Exception):
+    pass

@@ -11,7 +11,7 @@ class HarvestCompletedEvent(BaseEvent):
 
     @staticmethod
     def get_signature() -> bytes:
-        return b"InteractiveUseEndedEvent"
+        return b"hyv"
 
     @classmethod
     def from_proto(cls, proto) -> Self:

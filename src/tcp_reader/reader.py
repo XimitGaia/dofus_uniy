@@ -76,11 +76,11 @@ class TCPReader:
         _content =  stream.read()
         stream.seek(0)
         _read_size = None
-        _xxx = b"type.ankama.com/com.ankama.dofus.server.game.protocol.house.HousePropertiesEvent"
+        _xxx = b"type.ankama.com/iaf"
         if _xxx in _content:
-            _read_size = len(_content.split(_xxx)[0]) - 117
+            _read_size = len(_content.split(_xxx)[0]) - 32
         try:
-            stream.seek(107)
+            stream.seek(32)
             map_event = proto_test_pb2.MapComplementaryInformationEvent()
             map_event.ParseFromString(stream.read(_read_size))
             return MapChangeEvent.from_proto(map_event)
@@ -90,7 +90,7 @@ class TCPReader:
     @staticmethod
     def zaap_open(stream: io.BytesIO):
         stream.seek(0)
-        stream.seek(108)
+        stream.seek(32)
         map_event = proto_test_pb2.TeleportDestinationsEvent()
         map_event.ParseFromString(stream.read())
         return ZaapOpenedEvent.from_proto(map_event)
@@ -98,7 +98,7 @@ class TCPReader:
     @staticmethod
     def harvest_completed(stream: io.BytesIO):
         stream.seek(0)
-        stream.seek(107)
+        stream.seek(27)
         map_event = proto_test_pb2.InteractiveUseEndedEvent()
         map_event.ParseFromString(stream.read())
         return HarvestCompletedEvent.from_proto(map_event)
@@ -133,7 +133,7 @@ class TCPReader:
                 _size = len(stream.read())
                 stream.seek(0)
                 _stream = BytesIO(stream.read(_size - 1))
-                _stream.seek(86)
+                _stream.seek(27)
                 map_event.ParseFromString(_stream.read())
                 _pos.append(MonsterLocationEvent.from_proto(map_event))
                 continue
@@ -141,7 +141,7 @@ class TCPReader:
                 pass
 
             try:
-                stream.seek(86)
+                stream.seek(27)
                 map_event.ParseFromString(stream.read())
                 _pos.append(MonsterLocationEvent.from_proto(map_event))
                 continue
@@ -149,7 +149,7 @@ class TCPReader:
                 pass
 
             try:
-                stream.seek(90)
+                stream.seek(27)
                 map_event.ParseFromString(stream.read())
                 _pos.append(MonsterLocationEvent.from_proto(map_event))
                 continue

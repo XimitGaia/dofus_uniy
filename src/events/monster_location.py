@@ -10,7 +10,7 @@ class MonsterLocationEvent(BaseEvent):
 
     @staticmethod
     def get_signature() -> bytes:
-        return b"MapMovementEvent"
+        return b"igg"
 
 
     @classmethod

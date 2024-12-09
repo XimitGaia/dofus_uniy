@@ -11,7 +11,7 @@ class ZaapOpenedEvent(BaseEvent):
 
     @staticmethod
     def get_signature() -> bytes:
-        return b"TeleportDestinationsEvent"
+        return b"hfp"
 
     @classmethod
     def from_proto(cls, proto) -> Self:
