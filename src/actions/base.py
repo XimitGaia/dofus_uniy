@@ -15,6 +15,7 @@ class BaseAction(ABC):
 
     async def callback(self) -> bool:
         pass
+
     #
     # @abstractmethod
     # async def xxx(self):

@@ -63,7 +63,9 @@ class BotData:
             return result.fetchall()
 
     @classmethod
-    async def get_out_neighborhoods(cls, maps: set[int], exclude: set[int] = None) -> set[int]:
+    async def get_out_neighborhoods(
+        cls, maps: set[int], exclude: set[int] = None
+    ) -> set[int]:
         _to_replace = list(maps)
         async with cls._infra.get_cursor() as cursor:
             sql = f"""
@@ -78,7 +80,9 @@ class BotData:
             return set(_maps)
 
     @classmethod
-    async def get_in_neighborhoods(cls, maps: set[int], exclude: set[int] = None) -> set[int]:
+    async def get_in_neighborhoods(
+        cls, maps: set[int], exclude: set[int] = None
+    ) -> set[int]:
         _to_replace = list(maps)
         async with cls._infra.get_cursor() as cursor:
             sql = f"""
@@ -102,6 +106,17 @@ class BotData:
             """
             result = cursor.execute(sql)
             return random.choice(result)
+
+    @classmethod
+    async def get_zaap(cls, map_id: int):
+        async with cls._infra.get_cursor() as cursor:
+            sql = f"""
+                SELECT name FROM ZAAPS 
+                WHERE map_id = ?
+            """
+            result = cursor.execute(sql, [map_id])
+
+        return result.fetchone()[0]
 
 
 if __name__ == "__main__":

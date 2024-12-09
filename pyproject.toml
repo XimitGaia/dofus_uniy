@@ -16,6 +16,7 @@ pillow = "^10.4.0"
 clandestino = "^0.1.13"
 clandestino-sqlite = "^0.1.3"
 meeseeks-singleton = "^0.4.4"
+opencv-python = "^4.10.0.84"
 
 
 [tool.poetry.group.dev.dependencies]

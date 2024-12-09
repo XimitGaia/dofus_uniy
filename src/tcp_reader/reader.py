@@ -25,8 +25,6 @@ from src.model.state import State
 map_events = {}
 
 
-
-
 def retry(fn, count: int = 0, stop: int = 3):
     try:
         return fn()
@@ -65,15 +63,13 @@ class TCPReader:
         except Exception:
             _p = Path(f"./src/tcp_reader/tcp_chunks/{uuid4()}")
             print(_p)
-            with open(
-                _p.resolve(), "wb"
-            ) as file:
+            with open(_p.resolve(), "wb") as file:
                 file.write(payload)
 
     @staticmethod
-    def  map_change_event(stream: io.BytesIO):
+    def map_change_event(stream: io.BytesIO):
         stream.seek(0)
-        _content =  stream.read()
+        _content = stream.read()
         stream.seek(0)
         _read_size = None
         _xxx = b"type.ankama.com/iaf"
@@ -121,13 +117,15 @@ class TCPReader:
     @staticmethod
     def monster_location(stream: io.BytesIO):
         stream.seek(0)
-        _bytes = stream.read().split(b'\x1a')
+        _bytes = stream.read().split(b"\x1a")
         # ;*
-        _chunk_data = list(filter(lambda x: MonsterLocationEvent.get_signature() in x, _bytes))
+        _chunk_data = list(
+            filter(lambda x: MonsterLocationEvent.get_signature() in x, _bytes)
+        )
         map_event = proto_test_pb2.MapMovementEvent()
         _pos = []
         for i in _chunk_data:
-            stream = io.BytesIO(b'\x1a' + i)
+            stream = io.BytesIO(b"\x1a" + i)
             try:
                 stream.seek(0)
                 _size = len(stream.read())
@@ -169,8 +167,9 @@ class TCPReader:
     def bank_open(stream: io.BytesIO):
         return BankOpenEvent(True)
 
+
 if __name__ == "__main__":
-    _data = b'lela\x12\x02\x08\x01\x18\xff\xff\xff\xff\xff\xff\xff\xff\xff\x012\x14\x08\x02\x12\x0e\x08\x02 \x8c\x87\xd0\xf0\x02(\x8c\x87\xd0\xf0\x02\x18\x0eX\x1aV\nT\nNtype.ankama.com/com.ankama.dofus.server.game.protocol.fight.FightNewRoundEvent\x12\x02\x08\x01d\x1ab\n`\nTtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.SequenceStartEvent\x12\x08\x08\x08\x10\x8a\x87\xd0\xf0\x02}\x1a{\ny\nVtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.GameActionFightEvent\x12\x1f\x08\xac\x02\x10\x8a\x87\xd0\xf0\x02\x82\x01\x13\x08\x8a\x87\xd0\xf0\x02\x10\xc8\x02(\x012\x06\x08\xc9\x91\x01\x10\x01\x90\x01\x1a\x8d\x01\n\x8a\x01\nVtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.GameActionFightEvent\x120\x08\xb6\x07\x10\x8a\x87\xd0\xf0\x02B%\n#\x08\x01\x10\x8a\x87\xd0\xf0\x02\x18\x98\xf8\xff\xff\xff\xff\xff\xff\xff\x01 \x02(\xc9\x91\x010\xf9\x94\x0fB\x04\x08\x01 bd\x1ab\n`\nRtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.SequenceEndEvent\x12\n\x08\x03\x10\x8a\x87\xd0\xf0\x02\x18\x08_\x1a]\n[\nQtype.ankama.com/com.ankama.dofus.server.game.protocol.fight.FightIsTurnReadyEvent\x12\x06\x08\x8a\x87\xd0\xf0\x02'
+    _data = b"lela\x12\x02\x08\x01\x18\xff\xff\xff\xff\xff\xff\xff\xff\xff\x012\x14\x08\x02\x12\x0e\x08\x02 \x8c\x87\xd0\xf0\x02(\x8c\x87\xd0\xf0\x02\x18\x0eX\x1aV\nT\nNtype.ankama.com/com.ankama.dofus.server.game.protocol.fight.FightNewRoundEvent\x12\x02\x08\x01d\x1ab\n`\nTtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.SequenceStartEvent\x12\x08\x08\x08\x10\x8a\x87\xd0\xf0\x02}\x1a{\ny\nVtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.GameActionFightEvent\x12\x1f\x08\xac\x02\x10\x8a\x87\xd0\xf0\x02\x82\x01\x13\x08\x8a\x87\xd0\xf0\x02\x10\xc8\x02(\x012\x06\x08\xc9\x91\x01\x10\x01\x90\x01\x1a\x8d\x01\n\x8a\x01\nVtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.GameActionFightEvent\x120\x08\xb6\x07\x10\x8a\x87\xd0\xf0\x02B%\n#\x08\x01\x10\x8a\x87\xd0\xf0\x02\x18\x98\xf8\xff\xff\xff\xff\xff\xff\xff\x01 \x02(\xc9\x91\x010\xf9\x94\x0fB\x04\x08\x01 bd\x1ab\n`\nRtype.ankama.com/com.ankama.dofus.server.game.protocol.game.action.SequenceEndEvent\x12\n\x08\x03\x10\x8a\x87\xd0\xf0\x02\x18\x08_\x1a]\n[\nQtype.ankama.com/com.ankama.dofus.server.game.protocol.fight.FightIsTurnReadyEvent\x12\x06\x08\x8a\x87\xd0\xf0\x02"
     _a = BytesIO(_data)
 
     # _a.seek(92)

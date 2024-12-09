@@ -14,5 +14,5 @@ class OverSizedEvent(BaseEvent):
 
     @classmethod
     def from_proto(cls, proto) -> Self:
-        go_bank = (proto.inventoryWeight / proto.weightMax ) > 0.95
+        go_bank = (proto.inventoryWeight / proto.weightMax) > 0.95
         return cls(go_bank)

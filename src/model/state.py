@@ -66,7 +66,6 @@ class State:
     def monster_pos(self):
         return self._monster_pos
 
-
     async def setter(self, attr, value) -> None:
         self.__setattr__(attr, value)
         print(attr, value)
@@ -80,10 +79,7 @@ class State:
     async def _execute_callbacks(self, attribute: str):
         self._count += 1
         results = await asyncio.gather(
-            *[
-                _callback()
-                for _callback in self._callbacks.get(attribute, [])
-            ]
+            *[_callback() for _callback in self._callbacks.get(attribute, [])]
         )
         for i, v in enumerate(results):
             if v:
@@ -103,8 +99,6 @@ class State:
         }
         if callback := _map.get(event.__class__):
             asyncio.run(callback(event))
-
-
 
     async def map_change_event(self, event: MapChangeEvent):
         await self.setter("_map_id", event.map_id)
@@ -141,7 +135,7 @@ class State:
         _monster_pos = [*self._monster_pos]
         _changed = False
         for i in range(len(_monster_pos)):
-            if _monster_pos[i][0] ==  event.character_id:
+            if _monster_pos[i][0] == event.character_id:
                 _monster_pos[i] = (event.character_id, event.cell_id)
                 _changed = True
         if _changed is False:

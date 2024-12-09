@@ -15,4 +15,3 @@ class TurnStartEvent(BaseEvent):
     @classmethod
     def from_proto(cls, _) -> Self:
         return cls(True)
-

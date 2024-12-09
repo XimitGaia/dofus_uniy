@@ -13,8 +13,9 @@ class ChangeMapAction(BaseAction):
     timeout = 10
 
     def __init__(self, map_from, map_to):
-        self.map_from, self.map_to, self.cell_id, self.offset_x, self.offset_y = BotData.find_connectors(
-            map_id_from=map_from, map_id_to=map_to)
+        self.map_from, self.map_to, self.cell_id, self.offset_x, self.offset_y = (
+            BotData.find_connectors(map_id_from=map_from, map_id_to=map_to)
+        )
         self.lock = True
 
     async def _wait(self):
@@ -32,8 +33,9 @@ class ChangeMapAction(BaseAction):
 
     async def execute(self):
         _state = State()
-        _x, _y = Screen().from_cell(cell_id=self.cell_id, offset_x=self.offset_x, offset_y=self.offset_y)
+        _x, _y = Screen().from_cell(
+            cell_id=self.cell_id, offset_x=self.offset_x, offset_y=self.offset_y
+        )
         _state.watch("map_id", self.callback)
         moveTo(x=_x, y=_y, duration=1.3)
         await self._wait()
-

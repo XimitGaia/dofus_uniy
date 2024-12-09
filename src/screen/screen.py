@@ -6,6 +6,7 @@ import meeseeks
 import pyautogui
 from PIL import ImageGrab
 
+
 @meeseeks.OnlyOne()
 class Screen:
     screen_size: tuple[int, int]
@@ -27,7 +28,12 @@ class Screen:
         self.cell_width = _gameplay_width / 14.5
         self.cell_height = _gameplay_height / 20.5
         self.screen_size = (int(_width), int(_height))
-        self.gameplay_screen = (int(_x_offset), 0, int(_x_offset + _gameplay_width), int(_gameplay_height))
+        self.gameplay_screen = (
+            int(_x_offset),
+            0,
+            int(_x_offset + _gameplay_width),
+            int(_gameplay_height),
+        )
 
     def from_cell(self, cell_id: int, offset_x: float = 0, offset_y: float = 0):
         _row = cell_id // 14

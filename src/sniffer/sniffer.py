@@ -45,7 +45,6 @@ class Sniffer:
             _payload = self._buffer
         self._buffer = b""
 
-
         for event in map_events:
             if event.get_signature() not in _payload:
                 continue

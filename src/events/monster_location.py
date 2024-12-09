@@ -3,6 +3,7 @@ from typing import Self
 
 from src.events.base import BaseEvent
 
+
 @dataclass(slots=True, frozen=True)
 class MonsterLocationEvent(BaseEvent):
     character_id: int
@@ -11,7 +12,6 @@ class MonsterLocationEvent(BaseEvent):
     @staticmethod
     def get_signature() -> bytes:
         return b"igg"
-
 
     @classmethod
     def from_proto(cls, proto) -> Self:
