@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/dofus_unity.iml" filepath="$PROJECT_DIR$/.idea/dofus_unity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/dofus_uniy.iml" filepath="$PROJECT_DIR$/.idea/dofus_uniy.iml" />
     </modules>
   </component>
 </project>

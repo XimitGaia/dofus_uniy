@@ -34,7 +34,7 @@ class Sniffer:
     def _callback(self, packet):
         _payload = bytes(packet["TCP"].payload)
         self._counter += 1
-        # print(_payload)
+        print(_payload)
         with open(
             Path(f"./src/tcp_reader/tcp_chunks/{self._counter}").resolve(), "wb"
         ) as file:
@@ -43,7 +43,6 @@ class Sniffer:
         if b"type.ankama.com" not in _payload and self._buffer:
             self._buffer += _payload
             _payload = self._buffer
-        self._buffer = b""
 
         for event in map_events:
             if event.get_signature() not in _payload:
