@@ -34,26 +34,26 @@ class Sniffer:
     def _callback(self, packet):
         _payload = bytes(packet["TCP"].payload)
         self._counter += 1
-        print(_payload)
+        # print(_payload)
         with open(
             Path(f"./src/tcp_reader/tcp_chunks/{self._counter}").resolve(), "wb"
         ) as file:
             file.write(_payload)
-
-        if b"type.ankama.com" not in _payload and self._buffer:
-            self._buffer += _payload
-            _payload = self._buffer
-
+        self._buffer += _payload
+        keep_buffer = False
         for event in map_events:
-            if event.get_signature() not in _payload:
+            if event.get_signature() not in self._buffer:
                 continue
             try:
                 print(self._counter, event)
-                self.tcp_reader.process(_payload, event)
-                self._buffer = b""
+                self.tcp_reader.process(self._buffer, event)
             except:
-                self._buffer = _payload
+                self._buffer += _payload
                 print("\n\n @error# \n\n")
+                keep_buffer = True
+        if keep_buffer is False:
+            self._buffer = b""
+
 
     def start(self):
         self._sniffer.start()
