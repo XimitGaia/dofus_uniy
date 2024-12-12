@@ -1,6 +1,8 @@
 import asyncio
+import ctypes
+from time import sleep
 
-from pyautogui import moveTo
+from pyautogui import click, moveTo, mouseDown, mouseUp
 
 from src.actions.base import BaseAction
 from src.model.state import State
@@ -12,14 +14,10 @@ class OpenZaapAction(BaseAction):
     timeout = 5
 
     def __init__(self):
-        self.lock = True
-
-    async def _wait(self):
-        while self.lock:
-            await asyncio.sleep(0.1)
+        self.cell_id, self.offset_x, self.offset_y = 254, 0, 0
 
     async def callback(self) -> bool:
-        if self.lock == False:
+        if self.lock is False:
             return True
         _state = State()
         if _state.is_zaap_open:
@@ -29,11 +27,11 @@ class OpenZaapAction(BaseAction):
 
     async def execute(self):
         _state = State()
-        if _state.map_id == 162791424:
-            cell_id = 310
-        else:
-            cell_id = 310
-        _x, _y = Screen().from_cell(cell_id=cell_id, offset_x=0, offset_y=0)
+        _x, _y = Screen().from_cell(cell_id=self.cell_id)
         _state.watch("is_zaap_open", self.callback)
-        moveTo(x=_x, y=_y, duration=1.3)
+        moveTo(_x, _y, duration=0.8)
+        mouseDown()
+        await asyncio.sleep(0.2)
+        mouseUp()
         await self._wait()
+
