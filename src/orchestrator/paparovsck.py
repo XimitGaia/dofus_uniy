@@ -3,8 +3,13 @@ import asyncio
 from asyncio import CancelledError
 from contextlib import asynccontextmanager
 from queue import Queue
+from time import sleep
 
 from src.actions.base import BaseAction, ChangeSchedulerAction
+from src.actions.change_map import ChangeMapAction
+from src.actions.open_heavenbag import OpenHeavenBagAction
+from src.actions.open_heavenbag_zaap import OpenZaapAction
+from src.actions.teleport_heavenbag_zaap import TeleportHeavenbagZaapAction
 from src.enums import ScheduleType
 from src.events.figth_ended import FightEndedEvent
 from src.events.figth_started import FightStartedEvent
@@ -30,9 +35,9 @@ class Paparovisck:
         self._running = True
         self.sniffer_queue = queue
         self.schedules = {
-            ScheduleType.HARVEST: HarvestScheduler(**data),
-            ScheduleType.FIGHT: FightScheduler(),
-            ScheduleType.BANK: BankScheduler(),
+            # ScheduleType.HARVEST: HarvestScheduler(**data),
+            # ScheduleType.FIGHT: FightScheduler(),
+            # ScheduleType.BANK: BankScheduler(),
         }
         self._next_schedule = None
         self._current_schedule = ScheduleType.HARVEST
@@ -62,18 +67,23 @@ class Paparovisck:
         return self.schedules[self._current_schedule]
 
     async def play(self):
+        _a = [OpenHeavenBagAction(3,5), OpenZaapAction(), TeleportHeavenbagZaapAction(zaap_name="planicie dos porkassos", map_to=84806401), ChangeMapAction(map_from=84806401,map_to=84805889), ChangeMapAction(map_from=84805889,map_to=84805377), ChangeMapAction(map_from=84805377,map_to=189661703)]
+        _b = await asyncio.gather(*[i.init_async() for i in _a])
         while True:
-            self._current_action = next(self.schedule)
+            # self._current_action = next(self.schedule)
+            await asyncio.sleep(2)
+            self._current_action = _b.pop(0)
             if isinstance(self._current_action, ChangeSchedulerAction):
                 self.current_schedule = self._next_schedule
             await self.execute_with_retry_and_timeout()
+            print(_b)
 
     async def execute_with_retry_and_timeout(self, current: int = 0):
         if current == self._current_action.max_retry:
             raise Exception("Tirulabys")
         try:
             async with asyncio.timeout(self._current_action.timeout):
-                self._running_task = asyncio.Task(self._current_action.xxx())
+                self._running_task = asyncio.Task(self._current_action.execute())
                 await self._running_task
         except TimeoutError:
             await self.execute_with_retry_and_timeout(current=current + 1)

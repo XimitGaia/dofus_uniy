@@ -5,8 +5,8 @@ from src.actions.base import BaseAction
 from src.actions.change_map import ChangeMapAction
 from src.actions.collect_harvestable import CollectHarvestableAction
 from src.actions.open_heavenbag import OpenHeavenBagAction
-from src.actions.search_and_select_zaap import SearchAndSelectZaapAction
-from src.actions.use_heavenbag_zaap import OpenZaapAction
+from src.actions.teleport_heavenbag_zaap import TeleportHeavenbagZaapAction
+from src.actions.open_heavenbag_zaap import OpenZaapAction
 from src.enums import ScheduleType
 from src.model.state import State
 from src.repository.bot import BotData
@@ -20,7 +20,6 @@ class HarvestScheduler:
         self._cluster_max_distance = cluster_max_distance
         self._current_schedule = None
         self._schedules = asyncio.run(self._create_schedules())
-        print()
 
     def reset(self):
         if len(self._schedules) > 1:
@@ -43,7 +42,7 @@ class HarvestScheduler:
     async def _schedule_from_cluster(self, cluster: dict):
         _schedule = {"access": [], "schedule": []}
         _access_path = await self._get_access_path(maps=cluster["maps"])
-        _access_schedule = [OpenHeavenBagAction, OpenZaapAction, SearchAndSelectZaapAction] + [ChangeMapAction for i in _access_path[1:]]
+        _access_schedule = [OpenHeavenBagAction, OpenZaapAction, TeleportHeavenbagZaapAction] + [ChangeMapAction for i in _access_path[1:]]
         _schedule["access"] = _access_schedule
         _start_map = _access_path[-1]
         _deepest_path = await self._find_deepest_path(start_map=_start_map, maps=cluster["maps"])

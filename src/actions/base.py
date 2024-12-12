@@ -1,6 +1,7 @@
 import asyncio
 from abc import abstractmethod, ABC
 from dataclasses import dataclass
+from typing import Self
 
 import pyautogui
 
@@ -12,17 +13,20 @@ from src.model.state import State
 class BaseAction(ABC):
     timeout: int
     max_retry: int
+    lock: bool = False
+
+    async def init_async(self) -> Self:
+        return self
 
     async def callback(self) -> bool:
         pass
-    #
-    # @abstractmethod
-    # async def xxx(self):
-    #     _state = State()
-    #     _state.watch("map_id", self.callback)
-    #     pyautogui.click(0,0)
-    #     while self._t is False:
-    #         await asyncio.sleep(0.5)
+
+    async def _wait(self):
+        while self.lock:
+            await asyncio.sleep(0.1)
+
+    async def execute(self):
+        pass
 
 
 class ChangeSchedulerAction(BaseAction):

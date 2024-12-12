@@ -1,6 +1,8 @@
 import asyncio
+from time import sleep
 
-from pyautogui import press
+from keyboard import press_and_release
+from pyautogui import press, keyDown, keyUp
 
 from src.actions.base import BaseAction
 from src.model.state import State
@@ -9,25 +11,20 @@ from src.model.state import State
 class OpenHeavenBagAction(BaseAction):
     max_retry = 3
     timeout = 5
-    locked = True
 
-    def _gen_callback(self):
-        _state = State()
-        _count = _state.count
 
-        async def callback(count) -> bool:
-            if count != _count + 1:
-                return False
-            self.locked = False
+    async def callback(self) -> bool:
+        if self.lock is False:
             return True
-
-        return callback
+        _state = State()
+        if _state.map_id in [162791424, 162793472]:
+            self.lock = False
+            return True
+        return False
 
 
     async def execute(self):
         _state = State()
-        _state.watch("map_id", self._gen_callback())
-        press("h")
-        while self.locked:
-            await asyncio.sleep(0.5)
-
+        _state.watch("map_id", self.callback)
+        press_and_release("h")
+        await self._wait()

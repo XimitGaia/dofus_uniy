@@ -64,7 +64,7 @@ class TCPReader:
             raise error
         except Exception:
             _p = Path(f"./src/tcp_reader/tcp_chunks/{uuid4()}")
-            print(_p)
+            # print(_p)
             with open(
                 _p.resolve(), "wb"
             ) as file:

@@ -101,8 +101,4 @@ class BotData:
             AND map_id_from = {map_id_from}
             """
             result = cursor.execute(sql)
-            return random.choice(result)
-
-
-if __name__ == "__main__":
-    asyncio.run(BotData.get_out_neighborhoods(maps=[190055428], exclude=[190054916]))
+            return random.choice(result.fetchall())

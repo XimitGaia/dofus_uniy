@@ -69,7 +69,7 @@ class State:
 
     async def setter(self, attr, value) -> None:
         self.__setattr__(attr, value)
-        print(attr, value)
+        # print(attr, value)
         await self._execute_callbacks(attr)
 
     def watch(self, attribute: str, callback: Callable[[Any], Awaitable[bool]]) -> None:
