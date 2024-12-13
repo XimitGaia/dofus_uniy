@@ -29,9 +29,9 @@ def gen_map(map_files_folder: Path, worldgraph: Path, elements: Path):
             for _y in _x["m_transitions"]:
                 xxx = {
                     0: (0.08604543103448276, 0),  # right
-                    2: (0, -0.016666666666666666),  # down
+                    2: (0, 0.016666666666666666),  # up
                     4: (-0.08604543103448276, 0),  # left
-                    6: (0, 0.042709756097560975),  # up
+                    6: (0, -0.042709756097560975),  # down
                 }
                 offset_x, offset_y = xxx.get(_y["m_direction"], (0, 0))
                 # if _y["m_direction"] == 255:
